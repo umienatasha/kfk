@@ -1,3 +1,29 @@
+<?php
+    require('connection.php');
+    // When form submitted, check and create user session.
+    if (isset($_POST['username'])) {
+        $id_patient = stripslashes($_REQUEST['username']);    // removes backslashes
+        $id_patient = mysqli_real_escape_string($conn, $id_patient);
+        $password = stripslashes($_REQUEST['password']);
+        $password = mysqli_real_escape_string($conn, $password);
+        // Check user is exist in the database
+        $query    = "SELECT * FROM `tblpatient` WHERE username='$id_patient'
+                     AND password='" . md5($password) . "'";
+        $result = mysqli_query($conn, $query) or die(mysql_error());
+        $rows = mysqli_num_rows($result);
+        if ($rows == 1) {
+            $_SESSION['username'] = $id_patient;
+            // Redirect to user dashboard page
+            header("Location: booking.php");
+        } else {
+            echo "<div class='form'>
+                  <h3>Incorrect Username/password.</h3><br/>
+                  <p class='link'>Click here to <a href='login.php'>Login</a> again.</p>
+                  </div>";
+        }
+    } else {
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -76,31 +102,7 @@
 	</header>
 	<!-- End header -->
 	
-	<?php
-    require('connection.php');
-    // When form submitted, check and create user session.
-    if (isset($_POST['username'])) {
-        $id_patient = stripslashes($_REQUEST['username']);    // removes backslashes
-        $id_patient = mysqli_real_escape_string($conn, $id_patient);
-        $password = stripslashes($_REQUEST['password']);
-        $password = mysqli_real_escape_string($conn, $password);
-        // Check user is exist in the database
-        $query    = "SELECT * FROM `tblpatient` WHERE username='$id_patient'
-                     AND password='" . md5($password) . "'";
-        $result = mysqli_query($conn, $query) or die(mysql_error());
-        $rows = mysqli_num_rows($result);
-        if ($rows == 1) {
-            $_SESSION['username'] = $id_patient;
-            // Redirect to user dashboard page
-            header("Location: booking.php");
-        } else {
-            echo "<div class='form'>
-                  <h3>Incorrect Username/password.</h3><br/>
-                  <p class='link'>Click here to <a href='login.php'>Login</a> again.</p>
-                  </div>";
-        }
-    } else {
-?>
+	
 	<section class="page-section">
 		<div class="container">
 			 <div class="section-title row text-center">
