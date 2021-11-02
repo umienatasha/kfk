@@ -2,12 +2,12 @@
     require('connection.php');
     // When form submitted, check and create user session.
     if (isset($_POST['username'])) {
-        $id_patient = stripslashes($_REQUEST['username']);    // removes backslashes
-        $id_patient = mysqli_real_escape_string($conn, $id_patient);
+        $username = stripslashes($_REQUEST['username']);    // removes backslashes
+        $id_patient = mysqli_real_escape_string($conn, $username);
         $password = stripslashes($_REQUEST['password']);
         $password = mysqli_real_escape_string($conn, $password);
         // Check user is exist in the database
-        $query    = "SELECT * FROM `tblpatient` WHERE username='$id_patient'
+        $query    = "SELECT * FROM `tblpatient` WHERE username='$username'
                      AND password='" . md5($password) . "'";
         $result = mysqli_query($conn, $query) or die(mysql_error());
         $rows = mysqli_num_rows($result);
