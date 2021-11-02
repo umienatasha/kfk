@@ -78,7 +78,6 @@
 	
 	<?php
     require('connection.php');
-    session_start();
     // When form submitted, check and create user session.
     if (isset($_POST['username'])) {
         $id_patient = stripslashes($_REQUEST['username']);    // removes backslashes
