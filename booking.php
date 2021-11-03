@@ -1,7 +1,9 @@
 <?php
-//include auth_session.php file on all user panel pages
-include("auth_session.php");
-
+include('connection.php');
+ if(!isset($_SESSION["id_patient"])) {
+        header("Location: login.php");
+        exit();
+    }
 $id_patient=$_SESSION['id_patient'];
 
 $sql = "SELECT  * FROM tblpatient WHERE id_patient='$id_patient' ";
