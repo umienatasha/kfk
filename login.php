@@ -9,11 +9,11 @@
         // Check user is exist in the database
         $query    = "SELECT * FROM `tblpatient` WHERE username='$username'
                      AND password='" . md5($password) . "'";
-        $result = mysqli_query($conn, $query) or die(mysql_error($conn));
+        $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
         $row = mysqli_num_rows($result);                      // declare $row
-		$id_patient = mysqli_num_rows($result);               //declare $id_patient
+		$id_patient = $row["id_patient"];               //declare $id_patient
         if ($row == 1) {
-            $_SESSION['username'] = $id_patient;
+            $_SESSION['id_patient'] = $id_patient;
             // Redirect to user dashboard page
             header("Location: booking.php");
         } else {
