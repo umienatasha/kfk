@@ -10,7 +10,7 @@
         $query    = "SELECT * FROM `tblpatient` WHERE username='$username'
                      AND password='" . md5($password) . "'";
         $result = mysqli_query($conn, $query) or die(mysql_error());
-        $rows = mysqli_num_rows($result);
+        $rows = mysqli_num_rows($result); // declare $row
         if ($rows == 1) {
             $_SESSION['username'] = $id_patient;
             // Redirect to user dashboard page
