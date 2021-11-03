@@ -11,10 +11,13 @@
                      AND password='" . md5($password) . "'";
         $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
         $row = mysqli_num_rows($result);                      // declare $row
-		$id_patient = $row['id_patient'];               //declare $id_patient
-        if ($row == 1) {
-            print_r($_SESSION); 
-			exit();
+		$id_patient = mysqli_num_rows($result);               //declare $id_patient
+        if(mysqli_num_rows($result) > 0)
+			{
+				($row = mysqli_fetch_assoc($result)) // cara declare row
+			{
+            print_r($_SESSION); exit();
+
             // Redirect to user dashboard page
             header("Location: booking.php");
         } else {
