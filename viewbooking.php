@@ -259,7 +259,7 @@ $result = mysqli_query($conn, $sql);
 					?>
 					
 					<tr>
-							<td><?php echo $row["id_book"];?></td>                                            
+							<td><?php echo $row['id_book'];?></td>                                            
 							<td><?php echo $row['date']; ?></td>  
 							<td><?php echo $row['timeslot']; ?></td>
 							<td><?php
