@@ -10,14 +10,16 @@
         $query    = "SELECT * FROM `tblpatient` WHERE username='$username'
                      AND password='" . md5($password) . "'";
         $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
-        $row = mysqli_num_rows($result);
+        $rows = mysqli_num_rows($result);
 			{
 			  ($row = mysqli_fetch_assoc($result)) // cara declare row
 			{
-		// declare $row
+		
 		$id_patient = $row['id_patient'];               //declare $id_patient
-        if ($row == 1) {
+
+        if ($rows == 1) {
             $_SESSION['id_patient'] = $id_patient;
+
             // Redirect to user dashboard page
             header("Location: booking.php");
         } else {
