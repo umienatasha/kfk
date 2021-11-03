@@ -13,7 +13,8 @@
         $row = mysqli_num_rows($result);                      // declare $row
 		$id_patient = $row['id_patient'];               //declare $id_patient
         if ($row == 1) {
-            $_SESSION['id_patient'] = $id_patient;
+            print_r($_SESSION); 
+			exit();
             // Redirect to user dashboard page
             header("Location: booking.php");
         } else {
