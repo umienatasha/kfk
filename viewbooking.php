@@ -1,11 +1,13 @@
 <?php
 include('connection.php');
 
-$id_patient=$_SESSION['id_patient'];
+$id_patient=$_SESSION['id_book'];
 
 $sql = "SELECT * FROM bookings WHERE id_patient='$id_patient'";
 $result = mysqli_query($conn, $sql);
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -260,7 +262,21 @@ $result = mysqli_query($conn, $sql);
 							<td><?php echo $row["id_book"];?></td>                                            
 							<td><?php echo $row['date']; ?></td>  
 							<td><?php echo $row['timeslot']; ?></td>
-							<td><?php echo $row['name']; ?></td>
+							<td><?php
+							$med_id=$row["id_book"];
+							
+								$sql = "SELECT tblpatient.id_patient, tblpatient.username FROM tblpatient, bookings WHERE tblpatient.id_patient=bookings.id_patient and bookings.id_book='$med_id'";
+								$result = mysqli_query($conn, $sql);
+								
+								if(mysqli_num_rows($result)>0)
+								{
+									while($row2 = mysqli_fetch_assoc($result)){
+										
+										 echo $row2['username']; 
+										
+								}
+								}
+							?>	</td>
 							<td><?php echo $row['gender']; ?></td>  
 							<td><?php echo $row['phone']; ?></td>  
 							<td><?php echo $row['email']; ?></td>  
