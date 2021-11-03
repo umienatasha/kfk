@@ -9,7 +9,7 @@
         // Check user is exist in the database
         $query    = "SELECT * FROM `tblpatient` WHERE username='$username'
                      AND password='" . md5($password) . "'";
-        $result = mysqli_query($conn, $query) or die(mysql_error());
+        $result = mysqli_query($conn, $query) or die(mysqli_error());
         $row = mysqli_num_rows($result);                      // declare $row
 		$id_patient = $row['id_patient'];               //declare $id_patient
         if ($row == 1) {
