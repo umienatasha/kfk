@@ -332,7 +332,7 @@ function checkSlots($mysqli,$date){
 	</header>
 	<!-- End header -->
 	<center>
-	<h1 class="my-5">Hey, <?php echo $_SESSION['id_patient']; ?>!</b>.</h1>
+	<h1 class="my-5">Hey, <?php echo $username; ?>!</b>.</h1>
 	
 	<div id="page-container" class="main-admin">
             <div class="container-fluid" id="main">
