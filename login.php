@@ -15,7 +15,7 @@
 			  ($row = mysqli_fetch_assoc($result)) // cara declare row
 			{
 		// declare $row
-		$id_patient = mysqli_num_rows($result);               //declare $id_patient
+		$id_patient = $row['id_patient'];               //declare $id_patient
         if ($row == 1) {
             $_SESSION['id_patient'] = $id_patient;
             // Redirect to user dashboard page
