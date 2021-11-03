@@ -11,7 +11,7 @@
                      AND password='" . md5($password) . "'";
         $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
         $row = mysqli_num_rows($result);                      // declare $row
-		$id_patient = $row["id_patient"];               //declare $id_patient
+		$id_patient = $row['id_patient'];               //declare $id_patient
         if ($row == 1) {
             $_SESSION['id_patient'] = $id_patient;
             // Redirect to user dashboard page
