@@ -6,13 +6,12 @@ include('connection.php');
         exit();
     }
 	
-
+$id_patient=$_SESSION['id_patient'];
 $sql = "SELECT  * FROM tblpatient WHERE id_patient='$id_patient' ";
 $result = mysqli_query($conn, $sql);
 
-$num_rows = mysqli_num_rows($result);
-$rows = mysqli_fetch_assoc($result); // cara declare row
-$username=$rows['username'];
+$row = mysqli_fetch_assoc($result); // cara declare row
+$username=$row['username'];
 
 ?>
 
