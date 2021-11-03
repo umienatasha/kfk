@@ -253,7 +253,7 @@ $result = mysqli_query($conn, $sql);
 					<?php
 						if(mysqli_num_rows($result) > 0)
 						{
-						while($row = mysqli_fetch_assoc($result))
+						while($row = mysqli_fetch_assoc($result)) // cara declare row
 						{											
 
 					?>
