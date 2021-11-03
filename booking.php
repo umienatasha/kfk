@@ -5,7 +5,7 @@ include('connection.php');
 		print_r($_SESSION);
         exit();
     }
-$id_patient=$_SESSION['id_patient'];
+$username=$row['username'];
 
 $sql = "SELECT  * FROM tblpatient WHERE id_patient='$id_patient' ";
 $result = mysqli_query($conn, $sql);
