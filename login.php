@@ -10,8 +10,8 @@
         $query    = "SELECT * FROM `tblpatient` WHERE username='$username'
                      AND password='" . md5($password) . "'";
         $result = mysqli_query($conn, $query) or die(mysql_error());
-        $row = mysqli_num_rows($result); // declare $row
-		$id_patient = mysqli_num_rows($result); //declare $id_patient
+        $row = mysqli_num_rows($result);                      // declare $row
+		$id_patient = $row['username'];               //declare $id_patient
         if ($row == 1) {
             $_SESSION['username'] = $id_patient;
             // Redirect to user dashboard page
