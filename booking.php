@@ -1,6 +1,12 @@
 <?php
 //include auth_session.php file on all user panel pages
 include("auth_session.php");
+
+$id_patient=$_SESSION['id_patient'];
+
+$sql = "SELECT  * FROM tblpatient WHERE id_patient='$id_patient' ";
+$result = mysqli_query($conn, $sql);
+
 ?>
 
 <?php
