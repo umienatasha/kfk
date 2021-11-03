@@ -2,7 +2,7 @@
 include('connection.php');
  if(!isset($_SESSION["id_patient"])) {
         //  header("Location: login.php");
-		echo 'ada masalah';
+		print_r($_SESSION);
         exit();
     }
 $id_patient=$_SESSION['id_patient'];
