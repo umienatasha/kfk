@@ -33,7 +33,7 @@ if (isset($_POST['submit'])) {
             $msg = "<div class='alert alert-danger'>Already Booked</div>";
         } else {
             $stmt = $mysqli->prepare("INSERT INTO bookings (name, gender, phone, email, comment, date ,timeslot, id_patient) VALUES (?,?,?,?,?,?,?,?)");
-            $stmt->bind_param('ssssssss', $name, $gender, $phone, $email, $comment, $date, $timeslot, $id_patient);
+            $stmt->bind_param('sssssssi', $name, $gender, $phone, $email, $comment, $date, $timeslot, $id_patient);
             $stmt->execute();
             $msg = "<div class='alert alert-success'>Booking Successful
 			
