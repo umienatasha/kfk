@@ -25,7 +25,7 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $comment = $_POST['comment'];
     $timeslot = $_POST['timeslot'];
-
+    $id_patient = $_SESSION['id_patient'];
     $stmt = $mysqli->prepare("select * from bookings where date = ? AND timeslot = ?");
     $stmt->bind_param('ss', $date, $timeslot);
     if ($stmt->execute()) {
@@ -36,7 +36,7 @@ if (isset($_POST['submit'])) {
             $stmt = $mysqli->prepare("INSERT INTO bookings (name, gender, phone, email, comment, date ,timeslot, id_patient) VALUES (?,?,?,?,?,?,?,?)");
             $stmt->bind_param('sssssssi', $name, $gender, $phone, $email, $comment, $date, $timeslot, $id_patient);
             $stmt->execute();
-			echo $mysqli->error; exit;
+
             $msg = "<div class='alert alert-success'>Booking Successful
 			
 			<script>
