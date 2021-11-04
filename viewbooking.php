@@ -272,7 +272,7 @@ $result = mysqli_query($conn, $sql);
 								{
 									while($row2 = mysqli_fetch_assoc($result2)){
 										
-										 echo $row2['username']; 
+										 echo $row['name']; 
 										
 								}
 								}
