@@ -1,7 +1,7 @@
 <?php
 include('connection.php');
 
-$id_patient=$_SESSION['id_book'];
+$id_patient=$_SESSION['id_patient'];
 
 $sql = "SELECT * FROM bookings WHERE id_patient='$id_patient'";
 $result = mysqli_query($conn, $sql);
