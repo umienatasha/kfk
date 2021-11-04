@@ -268,7 +268,7 @@ $result = mysqli_query($conn, $sql);
 								$sql = "SELECT tblpatient.id_patient, tblpatient.username FROM tblpatient, bookings WHERE tblpatient.id_patient=bookings.id_patient and bookings.id_book='$med_id'";
 								$result2 = mysqli_query($conn, $sql);
 								
-								if(mysqli_num_rows($resul2t)>0)
+								if(mysqli_num_rows($result2)>0)
 								{
 									while($row2 = mysqli_fetch_assoc($result2)){
 										
