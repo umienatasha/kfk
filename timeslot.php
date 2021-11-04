@@ -25,7 +25,7 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $comment = $_POST['comment'];
     $timeslot = $_POST['timeslot'];
-    $id_patient = $_POST['id_patient'];
+
     $stmt = $mysqli->prepare("select * from bookings where date = ? AND timeslot = ?");
     $stmt->bind_param('ss', $date, $timeslot);
     if ($stmt->execute()) {
