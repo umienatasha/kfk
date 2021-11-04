@@ -32,8 +32,8 @@ if (isset($_POST['submit'])) {
         if ($result->num_rows > 5) {
             $msg = "<div class='alert alert-danger'>Already Booked</div>";
         } else {
-            $stmt = $mysqli->prepare("INSERT INTO bookings (name, gender, phone, email, comment, date ,timeslot) VALUES (?,?,?,?,?,?,?)");
-            $stmt->bind_param('sssssss', $name, $gender, $phone, $email, $comment, $date, $timeslot);
+            $stmt = $mysqli->prepare("INSERT INTO bookings (name, gender, phone, email, comment, date ,timeslot, id_patient) VALUES (?,?,?,?,?,?,?,?)");
+            $stmt->bind_param('ssssssss', $name, $gender, $phone, $email, $comment, $date, $timeslot, $id_patient);
             $stmt->execute();
             $msg = "<div class='alert alert-success'>Booking Successful
 			
