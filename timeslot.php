@@ -1,22 +1,17 @@
 <?php
 include('connection.php');
-
-$mysqli = new mysqli('localhost', 'root', "", 'ohana');
-if (isset($_GET['date'])) {
-    $date = $_GET['date'];
-    $stmt = $mysqli->prepare("SELECT * FROM bookings where date = ?");
-    $stmt->bind_param('s', $date);
-    $bookings = array();
-    if ($stmt->execute()) {
-        $result = $stmt->get_result();
-        if ($result->num_rows > 5) {
-            while ($row = $result->fetch_assoc()) {
-                $bookings[] = $row['timeslot'];
-            }
-            $stmt->close();
-        }
+ if(!isset($_SESSION["id_patient"])) {
+        //  header("Location: login.php");
+		print_r($_SESSION);
+        exit();
     }
-}
+	
+$id_patient=$_SESSION['id_patient'];
+$sql = "SELECT  * FROM tblpatient WHERE id_patient='$id_patient' ";
+$result = mysqli_query($conn, $sql);
+
+$row = mysqli_fetch_assoc($result); // cara declare row
+$username=$row['username'];
 
 ?>
 
@@ -116,7 +111,7 @@ if (isset($_GET['date'])) {
 				</button>
 				<div class="collapse navbar-collapse" id="navbars-host">
 					<ul class="navbar-nav ml-auto">					
-						<li class="nav-item active"><a class="nav-link" href="booking.php">Book Appointment</a></li>																									
+						<li class="nav-item active"><a class="nav-link" href="timeslot.php">Book Appointment</a></li>																									
 						<li class="nav-item"><a class="nav-link" href="viewbooking.php">My Appointment</a></li>																									
 						<li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>											
 					</ul>
@@ -127,23 +122,25 @@ if (isset($_GET['date'])) {
 	</header>
 	<!-- End header -->
 	<br>
-	<BR>
+		<center><h1 class="my-5">Hey, <?php echo $username; ?>!</b>.</h1></center>
 	
 	<div id="page-container" class="main-admin">
-            <div class="container-fluid" id="main">
-					<center>
-                    <div class="col-md-9 col-lg-10 main">
-						
-                        <hr>
-                        <div class="container">
-                            <h1 class="text-center">Book for Date: <?php echo date('d/m/Y', strtotime($date)); ?></h1>                         
-                        </div>
-				</center>
-                        
-	<center>
-	<div class="col-lg-10">
-	<form action="maklumat.php" method="post" class="checkdomain form-inline" >	
-			<div class="card-body">
+		<div class="container-fluid" id="main">
+			<div class="row justify-content-md-center">
+				<div class="col col-md-10">
+					<div class="card">
+						<div class="card-body">
+							<form method="post" action="maklumat.php">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label><strong>Tarikh</strong><span class="text-danger"></span></label>
+											<input type="date" name="date" class="form-control" data-parsley-trigger="keyup" required />
+										</div>
+									</div>
+								</div>
+									
+				<div class="card-body">
 		      		<table class="table table-striped table-bordered" >
 						<thead>
 			      			<tr>
@@ -198,21 +195,22 @@ if (isset($_GET['date'])) {
 								 <td>8</td>
 								 <td label for="5 pm - 6 pm">05:00 pm</label><br></td>
 								 <td><input type="radio"  name="timeslot" value="05:00 pm"></td>
-							</tr>
-							
+							</tr>	
 			      	</table>
 					
 					<center><button type="submit" class="btn btn-primary" name="submit">Seterusnya</button>
 			    </div>
+									
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			   <hr>
+		</div>
+				<hr>
+	</div>
 			
-			 </form></div>
-                       <hr>
-
-                    </div>
-                        <hr>
-                    </div>
-					</center>
-					
 					<script>
                         // sandbox disable popups
                         if (window.self !== window.top && window.name != "view1") {
@@ -280,115 +278,7 @@ if (isset($_GET['date'])) {
                             $("#myModal").modal("show");
                         });
                     </script>
-					
-					
-					
-					
-                    <script>
-                        // sandbox disable popups
-                        if (window.self !== window.top && window.name != "view1") {
-                            window.alert = function () {
-                                /*disable alert*/
-                            };
-                            window.confirm = function () {
-                                /*disable confirm*/
-                            };
-                            window.prompt = function () {
-                                /*disable prompt*/
-                            };
-                            window.open = function () {
-                                /*disable open*/
-                            };
-                        }
-
-                        // prevent href=# click jump
-                        document.addEventListener(
-                                "DOMContentLoaded",
-                                function () {
-                                    var links = document.getElementsByTagName("A");
-                                    for (var i = 0; i < links.length; i++) {
-                                        if (links[i].href.indexOf("#") != -1) {
-                                            links[i].addEventListener("click", function (e) {
-                                                console.debug("prevent href=# click");
-                                                if (this.hash) {
-                                                    if (this.hash == "#") {
-                                                        e.preventDefault();
-                                                        return false;
-                                                    } else {
-                                                        /*
-                                                         var el = document.getElementById(this.hash.replace(/#/, ""));
-                                                         if (el) {
-                                                         el.scrollIntoView(true);
-                                                         }
-                                                         */
-                                                    }
-                                                }
-                                                return false;
-                                            });
-                                        }
-                                    }
-                                },
-                                false
-                                );
-                    </script>
-                    <!--scripts loaded here-->
-                    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-                    <script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js"></script>
-                    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
-
-                    <script>
-                        $(document).ready(function () {
-                            $("[data-toggle=offcanvas]").click(function () {
-                                $(".row-offcanvas").toggleClass("active");
-                            });
-                        });
-                    </script>
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-xs-12">
-                    <div class="widget clearfix">
-                        <div class="widget-title">
-                            <h3>About US</h3>
-                        </div>
-                        <p> Integer rutrum ligula eu dignissim laoreet. Pellentesque venenatis nibh sed tellus faucibus bibendum. Sed fermentum est vitae rhoncus molestie. Cum sociis natoque penatibus et magnis dis montes.</p>
-                        <p>Sed fermentum est vitae rhoncus molestie. Cum sociis natoque penatibus et magnis dis montes.</p>
-                    </div><!-- end clearfix -->
-                </div><!-- end col -->
-
-				<div class="col-lg-4 col-md-4 col-xs-12">
-                    <div class="widget clearfix">
-                        <div class="widget-title">
-                            <h3>Information Link</h3>
-                        </div>
-                        <ul class="footer-links">
-                            <li><a href="index.php">Home</a></li>
-							<li><a href="about.php">Tentang Kami</a></li>
-							<li><a href="hosting.php">Rawatan</a></li>
-							<li><a href="contact.php">Contact</a></li>
-                        </ul><!-- end links -->
-                    </div><!-- end clearfix -->
-                </div><!-- end col -->
 				
-                <div class="col-lg-4 col-md-4 col-xs-12">
-                    <div class="widget clearfix">
-                        <div class="widget-title">
-                            <h3>Contact Details</h3>
-                        </div>
-
-                        <ul class="footer-links">
-                            <li><a href="mailto:#">info@yoursite.com</a></li>
-                            <li><a href="#">www.facebook.com</a></li>
-                            <li> Pusat Bandar Kangar, 01000 Kangar, Perlis</li>
-                            <li>+604-976 7366</li>
-                        </ul><!-- end links -->
-                    </div><!-- end clearfix -->
-                </div><!-- end col -->
-				
-            </div><!-- end row -->
-        </div><!-- end container -->
-    </footer><!-- end footer -->
-
     <!-- ALL JS FILES -->
     <script src="js/all.js"></script>
     <!-- ALL PLUGINS -->
