@@ -19,7 +19,7 @@
 			$id_patient=$_SESSION['id_patient'];
 
             // Redirect to user dashboard page
-            header("Location: booking.php");
+            header("Location: timeslot.php");
         } else {
             echo "<div class='form'>
                   <h3>Incorrect Username/password.</h3><br/>
