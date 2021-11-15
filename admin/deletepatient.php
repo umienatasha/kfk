@@ -3,11 +3,11 @@ include('connection.php');
 
 $uid=$_GET['id'];
 
-$deleteusr="DELETE FROM users where id='$uid'";
+
+$deleteusr="DELETE FROM tblpatient where id_patient='$uid'";
 $resultdelete= $conn->query($deleteusr);
 
 ?>
-
 <script>
 
     window.location="viewpatient.php";
