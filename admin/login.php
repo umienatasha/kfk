@@ -1,15 +1,14 @@
 <?php
 session_start();
-include 'connection.php';
 
-if(isset($_SESSION['user_data'])){
-	if($_SESSION['user_data']['user_type']=='admin'){
-		header("Location:index.php");
-	}
-	elseif($_SESSION['user_data']['user_type']=='instructor'){
-		header("Location:instructor/index.php");	
-	}
+$conn = mysqli_connect('localhost', 'root' );
+if($conn){
+	// echo "conenction successful";
+}else{
+	echo "no connection";
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -23,25 +22,9 @@ if(isset($_SESSION['user_data'])){
     <meta name="viewport" content="width=device-width, initial-scale=1">
  
      <!-- Site Metas -->
-    <title>Login</title> 
+    <title>Login Admin</title> 
 	
-	<script type="text/javascript">
-				function validate(){
-				var uname=document.myForm.username.value;
-				if(uname==""){
-						alert("Please enter username");
-						document.myForm.username.focus();
-						return false;
-					}
-					var password=document.myForm.password.value;
-					var illegalChar=/[\w_]/;
-					if(password==""){
-						alert("Please enter password");
-						document.myForm.password.focus();
-						return false;
-					}
-				} 
-    </script> 
+	
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -117,29 +100,24 @@ if(isset($_SESSION['user_data'])){
 			<div id="overviews" class="section lb">
 			<div class="container">
 			<div class="row">
-                    <?php if(isset($_REQUEST['error'])){ ?>
-                        <div class="col-lg-12">
-                            <center><span class="alert alert-danger" style="display: block;"><?php echo $_REQUEST['error']; ?></span></center>
-                    </div>
-                    <?php } ?>
                 </div>
 			<div class="col-lg-12">
 			
-					<form action="logprocess.php" class="form" name="myForm" method="post">
+					<form action="logprocess.php"  method="post">
 										
 						<div class="form-group">
 							<label><strong>Username</strong></label>
-							<input type="text" name="username" class="form-control" placeholder="Masukkan Nama Pengguna" required />
+							<input type="text" name="username" class="form-control" placeholder="Masukkan Nama Pengguna" required autocomplete="off"/>
 						</div>
 						
 						<div class="form-group">
 							<label><strong>Kata Laluan</strong></label>
-							<input type="password" name="password" class="form-control" placeholder="Masukkan Kata Laluan" required />
+							<input type="password" name="password" class="form-control" placeholder="Masukkan Kata Laluan" required autocomplete="off"/>
 						</div>
 					
 						
 							<div class="form-group">
-									<input type="submit" id="submit-btn" name="action" onClick="return validate();"  class="btn btn-info btn-md" value="Login">
+									<input type="submit" class="btn btn-success" name="submit">
 																															
 							</div>
 								
