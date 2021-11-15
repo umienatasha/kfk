@@ -283,29 +283,10 @@ $result = mysqli_query($conn, $sql);
                     <span class="icon-bar"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbars-host">
-					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link" href="admin.php">Home</a></li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">About Ohana </a>
-							<div class="dropdown-menu" aria-labelledby="dropdown-a">
-								<a class="dropdown-item" href="about.php">Latar Belakang</a>
-								<a class="dropdown-item" href="hosting.php">List Treatments</a>
-								<a class="dropdown-item" href="gallery.php">Gallery</a>
-							</div>
-						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Patient </a>
-							<div class="dropdown-menu" aria-labelledby="dropdown-a">								
-								<a class="dropdown-item" href="viewpatient.php">Details Patient </a>								
-							</div>
-						</li>
-						<li class="nav-item dropdown active">
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Bookings </a>
-							<div class="dropdown-menu" aria-labelledby="dropdown-a">						
-								<a class="dropdown-item" href="viewbooking.php">View Treatments Booking</a>								
-							</div>
-						</li>
-						<li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>
+					<ul class="navbar-nav ml-auto">					
+						<li class="nav-item"><a class="nav-link" href="timeslot.php">Book Appointment</a></li>																									
+						<li class="nav-item active"><a class="nav-link" href="viewbooking.php">My Appointment</a></li>																									
+						<li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>										
 					</ul>
 				</div>
 			</div>
