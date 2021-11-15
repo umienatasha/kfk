@@ -11,23 +11,6 @@
  
      <!-- Site Metas -->
     <title>Ohana Physiotherapy</title> 
-	<script type="text/javascript">
-            function validate(){
-            var uname=document.myForm.username.value;
-            if(uname==""){
-                    alert("Please enter username");
-                    document.myForm.username.focus();
-                    return false;
-                }
-                var password=document.myForm.password.value;
-                var illegalChar=/[\w_]/;
-                if(password==""){
-                    alert("Please enter password");
-                    document.myForm.password.focus();
-                    return false;
-                }
-            } 
-    </script> 
 
     <meta name="keywords" content="">
     <meta name="description" content="">
@@ -65,7 +48,11 @@
 				<a class="navbar-brand" href="index.php">
 					<img src="images/ohana.png" alt="" />
 				</a>
-			
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-host" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+				</button>
 				<div class="collapse navbar-collapse" id="navbars-host">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item active"><a class="nav-link" href="index.php">Home</a></li>
@@ -73,6 +60,7 @@
 						<li class="nav-item"><a class="nav-link" href="gallery.php">Galeri</a></li>										
 						<li class="nav-item"><a class="nav-link" href="hosting.php">Senarai Rawatan</a></li>										
 						<li class="nav-item"><a class="nav-link" href="contact.php">Hubungi Kami</a></li>
+						<li class="nav-item"><a class="nav-link" href="search.php">Semak Temujanji</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
                         <li><a class="hover-btn-new log" href="login.php" ><span>Temujanji</span></a></li>

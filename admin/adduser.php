@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
  
      <!-- Site Metas -->
-    <title>Register Patient</title> 
+    <title>Register</title> 
 	
 
     <meta name="keywords" content="">
@@ -69,29 +67,9 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbars-host">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link" href="admin.php">Home</a></li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">About Ohana </a>
-							<div class="dropdown-menu" aria-labelledby="dropdown-a">
-								<a class="dropdown-item" href="about.php">Latar Belakang</a>
-								<a class="dropdown-item" href="hosting.php">List Treatments</a>
-								<a class="dropdown-item" href="gallery.php">Gallery</a>
-							</div>
-						</li>
-						<li class="nav-item dropdown active">
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Patient </a>
-							<div class="dropdown-menu" aria-labelledby="dropdown-a">
-								<a class="dropdown-item" href="adduser.php">Add Patient </a>								
-								<a class="dropdown-item" href="viewpatient.php">Details Patient </a>								
-							</div>
-						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Bookings </a>
-							<div class="dropdown-menu" aria-labelledby="dropdown-a">
-								<a class="dropdown-item" href="viewbooking.php">Treatments Booking</a>								
-							</div>
-						</li>
-						<li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>
+						<li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+						<li class="nav-item active"><a class="nav-link" href="register.php">Daftar</a></li>
+
 					</ul>
 					
 				</div>
@@ -113,14 +91,14 @@
         $password = stripslashes($_REQUEST['password']);
         $password = mysqli_real_escape_string($conn, $password);
         $create_datetime = date("Y-m-d H:i:s");
-        $query    = "INSERT into `users` (username, password, email, create_datetime)
+        $query    = "INSERT into `tblpatient` (username, password, email, create_datetime)
                      VALUES ('$username', '" . md5($password) . "', '$email', '$create_datetime')";
         $result   = mysqli_query($conn, $query);
         if ($result) {
             echo "<div class='form'>
                   <h3>You are registered successfully.</h3><br/>
                   <script>
-					window.location='viewpatient.php';
+					window.location='login.php';
 				</script>
                   </div>";
         } else {
@@ -139,7 +117,7 @@
 		<div class="container">
 			 <div class="section-title row text-center">
 			 <div class="col-md-8 offset-md-2">
-                    <h3>Add Patient</h3>
+                    <h3>Daftar</h3>
                 </div>
             </div><!-- end title -->
 			
@@ -165,7 +143,8 @@
 
 						
 						<div class="form-group">
-									<input type="submit" name="submit" value="Register"  class="btn btn-info btn-md">																						
+									<input type="submit" name="submit" value="Register"  class="btn btn-info btn-md">
+									<p>Sudah Mempunyai Akaun ? <a href="login.php">Login</a>.<p>																						
 							</div>
 					
 					</form>
