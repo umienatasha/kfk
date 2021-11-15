@@ -1,11 +1,9 @@
 <?php
 session_start();
-include '../connection.php';
-if (isset($_SESSION['user_data'])) {
-    if ($_SESSION['user_data']['user_type'] !='admin' ) {
-        header("Location:index.php");
-    }
+if(!isset($_SESSION['username'])){
+	header('location:login.php');
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -85,8 +83,7 @@ if (isset($_SESSION['user_data'])) {
 						</li>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Patient </a>
-							<div class="dropdown-menu" aria-labelledby="dropdown-a">
-								<a class="dropdown-item" href="adduser.php">Add Patient </a>								
+							<div class="dropdown-menu" aria-labelledby="dropdown-a">								
 								<a class="dropdown-item" href="viewpatient.php">Details Patient </a>								
 							</div>
 						</li>
