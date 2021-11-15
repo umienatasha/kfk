@@ -3,6 +3,7 @@ include('connection.php');
 
 $date=$_POST['date'];
 $timeslot=$_POST['timeslot'];
+$id_patient=$_SESSION['id_patient'];
 
 $sql = "SELECT * FROM bookings WHERE date = '$date' AND timeslot = '$timeslot' ";
 $result = mysqli_query($conn, $sql);
@@ -100,8 +101,26 @@ $result = mysqli_query($conn, $sql);
 					</div>
 				</div>
 				
+				
+				
 				<div class="card-body">
 					<form method="post" action="regmaklumat.php">
+					
+					<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label><strong>Tarikh</strong><span class="text-danger"></span></label>
+									<input  name="date" class="form-control" readonly value="<?php echo $date; ?>" required  data-parsley-trigger="keyup" />
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label><strong>Masa</strong><span class="text-danger"></span></label>
+									<input type="text" name="timeslot" class="form-control"  readonly value="<?php echo $timeslot; ?>"  data-parsley-trigger="keyup" />
+								</div>
+							</div>
+						</div>
+					
 						<div class="form-group">
 							<label><strong>Nama</strong><span class="text-danger">*</span></label>
 							<input type="text" name="name"  class="form-control" value="" autofocus data-parsley-type="name" data-parsley-trigger="keyup" required />
@@ -137,10 +156,6 @@ $result = mysqli_query($conn, $sql);
 									</select>
 								</div>
 							</div>
-						</div>
-						<div class="form-group">
-							<label><strong>Alamat Tetap Terkini</strong><span class="text-danger">*</span></label>
-							<input type="text" name="address" class="form-control" value="" required data-parsley-trigger="keyup"></textarea>
 						</div>
 						<div class="form-group">
 							<label><strong>Jenis Penyakit</strong><span class="text-danger">*</span></label>
