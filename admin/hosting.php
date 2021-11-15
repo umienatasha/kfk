@@ -75,8 +75,7 @@
 						</li>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Patient </a>
-							<div class="dropdown-menu" aria-labelledby="dropdown-a">
-								<a class="dropdown-item" href="adduser.php">Add Patient </a>								
+							<div class="dropdown-menu" aria-labelledby="dropdown-a">							
 								<a class="dropdown-item" href="viewpatient.php">Details Patient </a>								
 							</div>
 						</li>
