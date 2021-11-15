@@ -1,6 +1,11 @@
 <?php
 include('connection.php');
 
+$date=$_POST['date'];
+$timeslot=$_POST['timeslot'];
+
+$sql = "SELECT * FROM bookings WHERE date = '$date' AND timeslot = '$timeslot' ";
+$result = mysqli_query($conn, $sql);
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +19,7 @@ include('connection.php');
     <meta name="viewport" content="width=device-width, initial-scale=1">
  
      <!-- Site Metas -->
-    <title>Update Patient</title> 
+    <title>Maklumat Diri</title> 
 	
 
     <meta name="keywords" content="">
@@ -72,7 +77,7 @@ include('connection.php');
 				</button>
 				<div class="collapse navbar-collapse" id="navbars-host">
 					<ul class="navbar-nav ml-auto">					
-						<li class="nav-item active"><a class="nav-link" href="booking.php">Book Appointment</a></li>																									
+						<li class="nav-item active"><a class="nav-link" href="timeslot.php">Book Appointment</a></li>																									
 						<li class="nav-item"><a class="nav-link" href="viewbooking.php">My Appointment</a></li>																									
 						<li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>											
 					</ul>
@@ -97,20 +102,6 @@ include('connection.php');
 				
 				<div class="card-body">
 					<form method="post" action="regmaklumat.php">
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-									<label><strong>Tarikh</strong><span class="text-danger"></span></label>
-									<input type="text" readonly name="date" class="form-control"   data-parsley-trigger="keyup" />
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label><strong>Masa</strong><span class="text-danger"></span></label>
-									<input type="text" readonly name="timeslot" class="form-control" value=""  data-parsley-trigger="keyup" />
-								</div>
-							</div>
-						</div>
 						<div class="form-group">
 							<label><strong>Nama</strong><span class="text-danger">*</span></label>
 							<input type="text" name="name"  class="form-control" value="" autofocus data-parsley-type="name" data-parsley-trigger="keyup" required />
@@ -156,7 +147,7 @@ include('connection.php');
 							<input type="text" name="comment" class="form-control" value="" required data-parsley-trigger="keyup"></textarea>
 						</div>
 						<div class="form-group pull-right">
-								<a href="viewbooking.php"><button type="submit" class="btn btn-primary" name="submit">Tempah</button></a>
+								<button type="submit" class="btn btn-primary" name="submit">Tempah</button></a>
 							</div>
 					</form>
 				</div>
