@@ -1,17 +1,19 @@
 <?php 
 include('connection.php');
 
+$date=$_POST['date'];
+$timeslot=$_POST['timeslot'];
 $name=$_POST['name'];
 $email=$_POST['email'];
 $ic=$_POST['ic'];
 $phone=$_POST['phone'];
 $gender=$_POST['gender'];
-$address=$_POST['address'];
 $comment=$_POST['comment'];
+$id_patient=$_SESSION['id_patient'];
 
 
-$sql = "INSERT INTO bookings ( name, email, ic, phone, gender, address, comment) 
-		VALUES ( '$name', '$email', '$ic', '$phone', '$gender', '$address', '$comment')";
+$sql = "INSERT INTO bookings (date, timeslot, name, email, ic, phone, gender, comment, id_patient) 
+		VALUES ('$date', '$timeslot', '$name', '$email', '$ic', '$phone', '$gender',  '$comment', '$id_patient')";
 
 if ($conn->query($sql) === TRUE) {
 	//echo "New record created successfully";
@@ -25,6 +27,6 @@ $conn->close();
 
 <script>
 
-	window.location="#";
+	window.location="viewbooking.php";
 
 </script>
