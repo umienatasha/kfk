@@ -4,11 +4,11 @@
     if (isset($_POST['username'])) {
         $username = stripslashes($_REQUEST['username']);    // removes backslashes
         $username = mysqli_real_escape_string($conn, $username);
-        $password = stripslashes($_REQUEST['password']);
-        $password = mysqli_real_escape_string($conn, $password);
+        $ic = stripslashes($_REQUEST['ic']);
+        $ic = mysqli_real_escape_string($conn, $ic);
         // Check user is exist in the database
         $query    = "SELECT * FROM `tblpatient` WHERE username='$username'
-                     AND password='" . md5($password) . "'";
+                     AND ic='$ic'";
         $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
         $num_rows = mysqli_num_rows($result);
 		$rows = mysqli_fetch_assoc($result); // cara declare row
@@ -128,7 +128,7 @@
 						
 						<div class="form-group">
 							<label><strong>Kata Laluan</strong></label>
-							<input type="password" name="password" class="form-control" placeholder="Masukkan Kata Laluan" required />
+							<input type="text" name="ic" class="form-control" placeholder="Masukkan Kad Pengenalan" required />
 						</div>
 					
 						
