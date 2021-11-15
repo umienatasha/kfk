@@ -1,8 +1,39 @@
 <?php
-include('connection.php');
+session_start();
+
+$conn = mysqli_connect('localhost', 'root' );
+
+$db = mysqli_select_db($conn, 'ohana');
 
 $sql = "SELECT * FROM bookings";
 $result = mysqli_query($conn, $sql);
+
+?>
+
+<?php
+
+if(isset($_POST['search']))
+{
+    $valueToSearch = $_POST['valueToSearch'];
+    // search in all table columns
+    // using concat mysql function
+    $query = "SELECT * FROM `bookings` WHERE CONCAT(`id_book`, `name`) LIKE '%".$valueToSearch."%'";
+    $search_result = filterTable($query);
+    
+}
+ else {
+    $query = "SELECT * FROM `bookings`";
+    $search_result = filterTable($query);
+}
+
+// function to connect and execute the query
+function filterTable($query)
+{
+    $conn = mysqli_connect("localhost", "root", "", "ohana");
+    $filter_Result = mysqli_query($conn, $query);
+    return $filter_Result;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -30,6 +61,24 @@ $result = mysqli_query($conn, $sql);
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
 
+		<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
 
     <!-- Site Icons -->
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
@@ -171,6 +220,53 @@ $result = mysqli_query($conn, $sql);
             .today {
                 background:yellow;
             }
+			
+			 /*
+			 * table
+			 * --------------------------------------------------
+			 */
+		 
+			.styled-table {
+				border-collapse: collapse;
+				margin: 25px 0;
+				font-size: 0.9em;
+				font-family: sans-serif;
+				min-width: 400px;
+				box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+			}
+			
+			.styled-table thead tr {
+				background-color: #009879;
+				color: #ffffff;
+				text-align: left;
+			}
+			
+			.styled-table th,
+			.styled-table td {
+				padding: 12px 15px;
+			}
+			
+			.styled-table tbody tr {
+				border-bottom: 1px solid #dddddd;
+			}
+
+			.styled-table tbody tr:nth-of-type(even) {
+				background-color: #f3f3f3;
+			}
+
+			.styled-table tbody tr:last-of-type {
+				border-bottom: 2px solid #009879;
+			}
+			
+			.styled-table tbody tr.active-row {
+				font-weight: bold;
+				color: #009879;
+			}
+			
+			table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
 	</style>
 
 </head>
@@ -223,15 +319,13 @@ $result = mysqli_query($conn, $sql);
 						</li>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Patient </a>
-							<div class="dropdown-menu" aria-labelledby="dropdown-a">
-								<a class="dropdown-item" href="adduser.php">Add Patient </a>								
+							<div class="dropdown-menu" aria-labelledby="dropdown-a">								
 								<a class="dropdown-item" href="viewpatient.php">Details Patient </a>								
 							</div>
 						</li>
 						<li class="nav-item dropdown active">
 							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Bookings </a>
-							<div class="dropdown-menu" aria-labelledby="dropdown-a">
-								<a class="dropdown-item" href="booking.php">Booking</a>								
+							<div class="dropdown-menu" aria-labelledby="dropdown-a">						
 								<a class="dropdown-item" href="viewbooking.php">View Treatments Booking</a>								
 							</div>
 						</li>
@@ -243,83 +337,80 @@ $result = mysqli_query($conn, $sql);
 	</header>
 	<!-- End header -->
 	
-	<section class="page-section">
-		<div class="container">
-			 <div class="section-title row text-center">
-			 <div class="col-md-8 offset-md-2">
-                    <h3>View Bookings</h3>
-					
-                </div>
-            </div><!-- end title -->
-			
-			<div id="overviews" class="section lb">
-			<div class="container">			
-				<table id="staff" class="table table-striped">
-                                    
-					<tr>
-					<thead>                        
-					<th><center>ID</center></th>
-					<th><center>DATE</center></th>
-					<th><center>TIME SLOT</center></th>
-					<th><center>PATIENT NAME</center></th>
-					<th><center>GENDER</center></th>
-					<th><center>NUMBER PHONE</center></th>
-					<th><center>EMAIL</center></th>
-					<th><center>NYATAKAN</center></th>
-					<th><center>ACTION</center></th>
-					</thead>
-					
-					<?php
-						if(mysqli_num_rows($result) > 0)
-						{
-						while($row = mysqli_fetch_assoc($result))
-						{											
-
-					?>
-					
-					
-					<body>
-							
-						<tr>
-                                            <td><?php echo $row["id"];?></td>                                            
-                                            <td><?php echo $row['date']; ?></td>  
-                                            <td><?php echo $row['timeslot']; ?></td>
-                                            <td><?php echo $row["name"];?></td>                                    
-                                            <td><?php echo $row['gender']; ?></td>  
-                                            <td><?php echo $row['phone']; ?></td>  
-                                            <td><?php echo $row['email']; ?></td>  
-                                            <td><?php echo $row['comment']; ?></td>  
-                                          
-
-											<td>
-												
-												<center>												
-												<button><a href="deletebooking.php?id=<?php echo $row["id"]; ?>" class="btn btn-danger delete-listview-btn" onClick="return confirm('Do you really want to delete?');">Delete</a></button>
-												
-												</center>
-												
-											</td>
-
-											
-										</tr>
-					</body>
-					<?php
-						   }
-						}
-						else 
-						{
-						   echo "0 results";
-						}
-
-						mysqli_close($conn);
-					?>
-				</table>
-				
-			</div><!-- end container -->
-			</div><!-- end section -->
+	<div class="all-title-box">
+		<div class="container text-center">
+			<h1>Appointment List<span class="m_1"></span></h1>
 		</div>
-	</section>
+	</div>
+	<BR>
+	
+	<div class="col-lg-12">
+	<form action="viewbooking.php" method="post" class="checkdomain form-inline" >
+		<div class="checkdomain-wrapper">
+			<div class="form-group">
+				<label class="sr-only" for="domainnamehere">Domain name</label>
+				<input type="text" class="form-control" id="domainnamehere" name="valueToSearch" placeholder="Enter Name or Username">
+				<button type="submit" name="search" value="Filter" class="btn btn-primary grd1"><i class="fa fa-search"></i></button>
+			</div>
+			<hr>
+	
+		</div><!-- end checkdomain-wrapper -->
+	
+			<div class="card-body">
+				<div class="table-responsive">
+		      		<table class="table table-striped table-bordered" id="appointment_list_table">
+		      			<thead>
+			      			<tr>
+			      				<th><strong>DATE</th>
+			      				<th><strong>TIME SLOT</th>
+			      				<th><strong>PATIENT NAME</th>
+			      				<th><strong>ACTION</th>
+			      			</tr>
+			      		</thead>
+						
+						<?php
+							if(mysqli_num_rows($result) > 0)
+							{
+							while($row = mysqli_fetch_assoc($result))
+							{											
 
+						?>
+						
+						<tbody>
+						<?php while($row = mysqli_fetch_array($search_result)):?>
+							<tr class="row100">
+								<td><?php echo $row['date']; ?></td>
+								<td><?php echo $row['timeslot']; ?></td>
+								<td><?php echo $row['name']; ?></td>
+								
+								<td>				
+									<center>												
+									<button><a href="displaybooking.php?id=<?php echo $row["id_book"]; ?>" class="btn btn-danger delete-listview-btn" onClick="return confirm">View</a></button>
+									<button><a href="deletebooking.php?id=<?php echo $row["id_book"]; ?>" class="btn btn-danger delete-listview-btn" onClick="return confirm('Do you really want to delete?');">Delete</a></button>
+									
+									</center>	
+								</td>
+							</tr>	
+							<?php endwhile;?>							
+						</tbody>
+						
+						<?php
+							   }
+							}
+							else 
+							{
+							   echo "0 results";
+							}
+
+							mysqli_close($conn);
+						?>
+						
+			      		<tbody></tbody>
+			      	</table>
+			    </div>
+			</div>
+			 </form>
+                </div> 
   
     <footer class="footer">
         <div class="container">
@@ -440,5 +531,7 @@ $result = mysqli_query($conn, $sql);
 			visibleItems: 4
 		});
 	</script>
+	
+	
 </body>
 </html>
