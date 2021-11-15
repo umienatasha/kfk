@@ -1,5 +1,5 @@
 <?php
-include('connection.php');
+session_start();
 
 $mysqli = new mysqli('localhost', 'root', "", 'ohana');
 if (isset($_GET['date'])) {
@@ -181,15 +181,13 @@ function timeslots($duration, $cleanup, $start, $end) {
 						</li>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Patient </a>
-							<div class="dropdown-menu" aria-labelledby="dropdown-a">
-								<a class="dropdown-item" href="adduser.php">Add Patient </a>								
+							<div class="dropdown-menu" aria-labelledby="dropdown-a">								
 								<a class="dropdown-item" href="viewpatient.php">Details Patient </a>								
 							</div>
 						</li>
 						<li class="nav-item dropdown active">
 							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Bookings </a>
-							<div class="dropdown-menu" aria-labelledby="dropdown-a">
-								<a class="dropdown-item" href="booking.php">Booking</a>								
+							<div class="dropdown-menu" aria-labelledby="dropdown-a">							
 								<a class="dropdown-item" href="viewbooking.php">View Treatments Booking</a>								
 							</div>
 						</li>
@@ -238,219 +236,205 @@ function timeslots($duration, $cleanup, $start, $end) {
                             </div>
                         </div>
 				</center>
-                        
-				<form action="" method="POST">
-                            <div id="myModal" class="modal fade" role="dialog">
-                                <div class="modal-dialog">
-                                    <!-- Modal content-->
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Booking: <span id="slot"></span></h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for=""><strong>Time Slot</strong></label>
-                                                        <input type="text" readonly name="timeslot" id="timeslot" class="form-control" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <select class="form-control" name="name" required >
-														<option>Select Patient</option>
-														<?php
-															$sql = "SELECT username FROM users WHERE id not in (SELECT name FROM bookings)";
-															$result = mysqli_query($conn, $sql);
-															
-															if(mysqli_num_rows($result)>0)
-															{
-																while($row = mysqli_fetch_assoc($result)){
-																	?>
-																	<option value="<?php echo $row['username']; ?>"><?php echo $row['username']; ?></option>
-																	<?php
-															}
-															}
-														?>						
-															
-														</select>	
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for=""><strong>Jantina</strong></label>
-                                                        <select class="form-control" name="gender" id="gender" required> 
-                                                            <option value="" disabled selected hidden>Pilih Jantina</option>
-                                                            <option value="Lelaki">Lelaki</option>
-                                                            <option value="Perempuan">Perempuan</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for=""><strong>Number Telefon</strong></label>
-                                                        <input type="number" name="phone" class="form-control" required>
-                                                    </div>
-                                                </div>	
-												<div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for=""><strong>E-Mel</strong></label>
-                                                        <input type="text" name="email" class="form-control" required>
-                                                    </div>
-                                                </div>	
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for=""><strong>Nyatakan</strong></label>
-                                                        <input type="text" name="comment" class="form-control" required>
-                                                    </div>
-                                                    <div class="form-group pull-right">
-                                                        <a href="viewbooking.php"><button type="submit" class="btn btn-primary" name="submit">Submit</button></a>
-                                                    </div>
-                                                </div>
-                                            </div> 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                       <hr>
+			
+	<form action="" method="POST">
+				<div id="myModal" class="modal fade" role="dialog">
+					<div class="modal-dialog">
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title">Booking: <span id="slot"></span></h4>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+							<div class="modal-body">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label for=""><strong>Time Slot</strong></label>
+											<input type="text" readonly name="timeslot" id="timeslot" class="form-control" required>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label for=""><strong>Full Name</strong></label>
+											<input type="text" name="name" class="form-control" required>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label for=""><strong>Jantina</strong></label>
+											<select class="form-control" name="gender" id="gender" required> 
+												<option value="" disabled selected hidden>Pilih Jantina</option>
+												<option value="Lelaki">Lelaki</option>
+												<option value="Perempuan">Perempuan</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label for=""><strong>Number Telefon</strong></label>
+											<input type="number" name="phone" class="form-control" required>
+										</div>
+									</div>	
+									<div class="col-md-12">
+										<div class="form-group">
+											<label for=""><strong>E-Mel</strong></label>
+											<input type="text" name="email" class="form-control" required>
+										</div>
+									</div>	
+									<div class="col-md-12">
+										<div class="form-group">
+											<label for=""><strong>Nyatakan</strong></label>
+											<input type="text" name="comment" class="form-control" required>
+										</div>
+										<div class="form-group pull-right">
+											<a href="viewbooking.php"><button type="submit" class="btn btn-primary" name="submit">Submit</button></a>
+										</div>
+									</div>
+								</div> 
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</form>
+		   <hr>
 
-                    </div>
-                        <hr>
-                    </div>
-					</center>
-					
-					<script>
-                        // sandbox disable popups
-                        if (window.self !== window.top && window.name != "view1") {
-                            window.alert = function () {
-                                /*disable alert*/
-                            };
-                            window.confirm = function () {
-                                /*disable confirm*/
-                            };
-                            window.prompt = function () {
-                                /*disable prompt*/
-                            };
-                            window.open = function () {
-                                /*disable open*/
-                            };
-                        }
+		</div>
+			<hr>
+		</div>
+		</center>
+		
+		<script>
+			// sandbox disable popups
+			if (window.self !== window.top && window.name != "view1") {
+				window.alert = function () {
+					/*disable alert*/
+				};
+				window.confirm = function () {
+					/*disable confirm*/
+				};
+				window.prompt = function () {
+					/*disable prompt*/
+				};
+				window.open = function () {
+					/*disable open*/
+				};
+			}
 
-                        // prevent href=# click jump
-                        document.addEventListener(
-                                "DOMContentLoaded",
-                                function () {
-                                    var links = document.getElementsByTagName("A");
-                                    for (var i = 0; i < links.length; i++) {
-                                        if (links[i].href.indexOf("#") != -1) {
-                                            links[i].addEventListener("click", function (e) {
-                                                console.debug("prevent href=# click");
-                                                if (this.hash) {
-                                                    if (this.hash == "#") {
-                                                        e.preventDefault();
-                                                        return false;
-                                                    } else {
-                                                        /*
-                                                         var el = document.getElementById(this.hash.replace(/#/, ""));
-                                                         if (el) {
-                                                         el.scrollIntoView(true);
-                                                         }
-                                                         */
-                                                    }
-                                                }
-                                                return false;
-                                            });
-                                        }
-                                    }
-                                },
-                                false
-                                );
-                    </script>
-                    <!--scripts loaded here-->
-                    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-                    <script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js"></script>
-                    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+			// prevent href=# click jump
+			document.addEventListener(
+					"DOMContentLoaded",
+					function () {
+						var links = document.getElementsByTagName("A");
+						for (var i = 0; i < links.length; i++) {
+							if (links[i].href.indexOf("#") != -1) {
+								links[i].addEventListener("click", function (e) {
+									console.debug("prevent href=# click");
+									if (this.hash) {
+										if (this.hash == "#") {
+											e.preventDefault();
+											return false;
+										} else {
+											/*
+											 var el = document.getElementById(this.hash.replace(/#/, ""));
+											 if (el) {
+											 el.scrollIntoView(true);
+											 }
+											 */
+										}
+									}
+									return false;
+								});
+							}
+						}
+					},
+					false
+					);
+		</script>
+		<!--scripts loaded here-->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js"></script>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
 
-                    <script>
-                        $(document).ready(function () {
-                            $("[data-toggle=offcanvas]").click(function () {
-                                $(".row-offcanvas").toggleClass("active");
-                            });
-                        });
-                    </script>
-                    <script>
-                        $(".book").click(function () {
-                            var timeslot = $(this).attr('data-timeslot');
-                            $("#slot").html(timeslot);
-                            $("#timeslot").val(timeslot);
-                            $("#myModal").modal("show");
-                        });
-                    </script>
-					
-					
-					
-					
-                    <script>
-                        // sandbox disable popups
-                        if (window.self !== window.top && window.name != "view1") {
-                            window.alert = function () {
-                                /*disable alert*/
-                            };
-                            window.confirm = function () {
-                                /*disable confirm*/
-                            };
-                            window.prompt = function () {
-                                /*disable prompt*/
-                            };
-                            window.open = function () {
-                                /*disable open*/
-                            };
-                        }
+		<script>
+			$(document).ready(function () {
+				$("[data-toggle=offcanvas]").click(function () {
+					$(".row-offcanvas").toggleClass("active");
+				});
+			});
+		</script>
+		<script>
+			$(".book").click(function () {
+				var timeslot = $(this).attr('data-timeslot');
+				$("#slot").html(timeslot);
+				$("#timeslot").val(timeslot);
+				$("#myModal").modal("show");
+			});
+		</script>
+		
+		
+		
+		
+		<script>
+			// sandbox disable popups
+			if (window.self !== window.top && window.name != "view1") {
+				window.alert = function () {
+					/*disable alert*/
+				};
+				window.confirm = function () {
+					/*disable confirm*/
+				};
+				window.prompt = function () {
+					/*disable prompt*/
+				};
+				window.open = function () {
+					/*disable open*/
+				};
+			}
 
-                        // prevent href=# click jump
-                        document.addEventListener(
-                                "DOMContentLoaded",
-                                function () {
-                                    var links = document.getElementsByTagName("A");
-                                    for (var i = 0; i < links.length; i++) {
-                                        if (links[i].href.indexOf("#") != -1) {
-                                            links[i].addEventListener("click", function (e) {
-                                                console.debug("prevent href=# click");
-                                                if (this.hash) {
-                                                    if (this.hash == "#") {
-                                                        e.preventDefault();
-                                                        return false;
-                                                    } else {
-                                                        /*
-                                                         var el = document.getElementById(this.hash.replace(/#/, ""));
-                                                         if (el) {
-                                                         el.scrollIntoView(true);
-                                                         }
-                                                         */
-                                                    }
-                                                }
-                                                return false;
-                                            });
-                                        }
-                                    }
-                                },
-                                false
-                                );
-                    </script>
-                    <!--scripts loaded here-->
-                    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-                    <script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js"></script>
-                    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+			// prevent href=# click jump
+			document.addEventListener(
+					"DOMContentLoaded",
+					function () {
+						var links = document.getElementsByTagName("A");
+						for (var i = 0; i < links.length; i++) {
+							if (links[i].href.indexOf("#") != -1) {
+								links[i].addEventListener("click", function (e) {
+									console.debug("prevent href=# click");
+									if (this.hash) {
+										if (this.hash == "#") {
+											e.preventDefault();
+											return false;
+										} else {
+											/*
+											 var el = document.getElementById(this.hash.replace(/#/, ""));
+											 if (el) {
+											 el.scrollIntoView(true);
+											 }
+											 */
+										}
+									}
+									return false;
+								});
+							}
+						}
+					},
+					false
+					);
+		</script>
+		<!--scripts loaded here-->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js"></script>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
 
-                    <script>
-                        $(document).ready(function () {
-                            $("[data-toggle=offcanvas]").click(function () {
-                                $(".row-offcanvas").toggleClass("active");
-                            });
-                        });
-                    </script>
+		<script>
+			$(document).ready(function () {
+				$("[data-toggle=offcanvas]").click(function () {
+					$(".row-offcanvas").toggleClass("active");
+				});
+			});
+		</script>
     <footer class="footer">
         <div class="container">
             <div class="row">
