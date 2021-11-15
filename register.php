@@ -1,4 +1,53 @@
+<?php
 
+session_start();
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "ohana";
+
+
+// Create connection
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+
+// Check connection
+if (!$conn)
+{
+	die("Connection failed: " . mysqli_connect_error());
+}
+
+
+    // When form submitted, insert values into the database.
+    if (isset($_REQUEST['username'])) {
+        // removes backslashes
+        $username = stripslashes($_REQUEST['username']);
+        //escapes special characters in a string
+        $username = mysqli_real_escape_string($conn, $username);
+        $email    = stripslashes($_REQUEST['email']);
+        $email    = mysqli_real_escape_string($conn, $email);
+		$phone = stripslashes($_REQUEST['phone']);
+        $phone = mysqli_real_escape_string($conn, $phone);
+		$address = stripslashes($_REQUEST['address']);
+        $address = mysqli_real_escape_string($conn, $address);
+		$gender = stripslashes($_REQUEST['gender']);
+        $gender = mysqli_real_escape_string($conn, $gender);
+		$name = stripslashes($_REQUEST['name']);
+        $name = mysqli_real_escape_string($conn, $name);
+		$ic = stripslashes($_REQUEST['ic']);
+        $ic = mysqli_real_escape_string($conn, $ic);
+        $create_datetime = date("Y-m-d H:i:s");
+        $query    = "INSERT into `tblpatient` (username, email, phone, address, gender, name, ic, create_datetime)
+                     VALUES ('$username', '$email', '$phone', '$address', '$gender', '$name', '$ic', '$create_datetime')";
+        $result   = mysqli_query($conn, $query);
+        if ($result) {
+            echo "<div class='form'>
+                  <script>
+					window.location='login.php';
+				</script>
+                  </div>";
+        } 
+    } else {
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -80,40 +129,6 @@
 	</header>
 	<!-- End header -->
 	
-	<?php
-    require('connection.php');
-    // When form submitted, insert values into the database.
-    if (isset($_REQUEST['username'])) {
-        // removes backslashes
-        $username = stripslashes($_REQUEST['username']);
-        //escapes special characters in a string
-        $id_patient = mysqli_real_escape_string($conn, $username);
-        $email    = stripslashes($_REQUEST['email']);
-        $email    = mysqli_real_escape_string($conn, $email);
-        $password = stripslashes($_REQUEST['password']);
-        $password = mysqli_real_escape_string($conn, $password);
-        $create_datetime = date("Y-m-d H:i:s");
-        $query    = "INSERT into `tblpatient` (username, password, email, create_datetime)
-                     VALUES ('$id_patient', '" . md5($password) . "', '$email', '$create_datetime')";
-        $result   = mysqli_query($conn, $query);
-        if ($result) {
-            echo "<div class='form'>
-                  <h3>You are registered successfully.</h3><br/>
-                  <script>
-					window.location='login.php';
-				</script>
-                  </div>";
-        } else {
-            echo "<div class='form'>
-                  <h3>Required fields are missing.</h3><br/>
-                  <script>
-					window.location='register.php';
-				</script>
-                  </div>";
-        }
-    } else {
-?>
-	
 	
 	<section class="page-section">
 		<div class="container">
@@ -129,20 +144,43 @@
 					<form action="" method="post">
 										
 						<div class="form-group">
-							<label><strong>Username</strong></label>
-							<input type="text" name="username" class="form-control"  placeholder="Masukkan Nama Pengguna" required />
-						</div>
+							<label><strong>Nama Penuh</strong></label>
+							<input type="text" name="name" class="form-control"  placeholder="Masukkan Nama Penuh" required />
+						</div>				
 						
 						<div class="form-group">
 							<label><strong>E-Mel</strong></label>
 							<input type="text" name="email" class="form-control"  placeholder="Masukkan Kata Laluan" required />
 						</div>
+
+						<div class="form-group">
+							<label><strong>Number Phone</strong></label>
+							<input type="number" name="phone" class="form-control"  placeholder="Masukkan Number Telefon" required />
+						</div>
 						
 						<div class="form-group">
-							<label><strong>Kata Laluan</strong></label>
-							<input type="password" name="password" class="form-control"  placeholder="Masukkan Nama Penuh" required />
+							<label><strong>Kad Pengenalan</strong></label>
+							<input type="text" name="ic" class="form-control"  placeholder="Masukkan Kad Pengenalan" required />
 						</div>
-
+						
+						<div class="form-group">
+							<label><strong>Address</strong></label>
+							<input type="text" name="address" class="form-control"  placeholder="Masukkan Alamat Terkini Anda" required />
+						</div>
+						
+						<div class="form-group">
+							<label><strong>Patient Gender</strong><span class="text-danger"></span></label>
+							<select name="gender" id="gender" class="form-control">
+								<option value="Male">Male</option>
+								<option value="Female">Female</option>
+							</select>
+						</div>
+						
+						<div class="form-group">
+							<label><strong>Username</strong></label>
+							<input type="text" name="username" class="form-control"  placeholder="Masukkan Nama Pengguna" required />
+						</div>
+						
 						
 						<div class="form-group">
 									<input type="submit" name="submit" value="Register"  class="btn btn-info btn-md">
