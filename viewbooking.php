@@ -278,7 +278,7 @@ $result = mysqli_query($conn, $sql);
 				</button>
 				<div class="collapse navbar-collapse" id="navbars-host">
 					<ul class="navbar-nav ml-auto">					
-						<li class="nav-item"><a class="nav-link" href="booking.php">Book Appointment</a></li>																									
+						<li class="nav-item"><a class="nav-link" href="timeslot.php">Book Appointment</a></li>																									
 						<li class="nav-item active"><a class="nav-link" href="viewbooking.php">My Appointment</a></li>																									
 						<li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>										
 					</ul>
@@ -316,6 +316,7 @@ $result = mysqli_query($conn, $sql);
 						?>
 						
 						<tbody>
+						
 							<tr class="row100">
 								<td><?php echo $row['date']; ?></td>
 								<td><?php echo $row['timeslot']; ?></td>
