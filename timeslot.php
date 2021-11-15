@@ -18,62 +18,6 @@ if (isset($_GET['date'])) {
     }
 }
 
-if (isset($_POST['submit'])) {
-    $name = $_POST['name'];
-    $gender = $_POST['gender'];
-    $phone = $_POST['phone'];
-    $email = $_POST['email'];
-    $comment = $_POST['comment'];
-    $timeslot = $_POST['timeslot'];
-    $id_patient = $_SESSION['id_patient'];
-    $stmt = $mysqli->prepare("select * from bookings where date = ? AND timeslot = ?");
-    $stmt->bind_param('ss', $date, $timeslot);
-    if ($stmt->execute()) {
-        $result = $stmt->get_result();
-        if ($result->num_rows > 7) {
-            $msg = "<div class='alert alert-danger'>Already Booked</div>";
-        } else {
-            $stmt = $mysqli->prepare("INSERT INTO bookings (name, gender, phone, email, comment, date ,timeslot, id_patient) VALUES (?,?,?,?,?,?,?,?)");
-            $stmt->bind_param('sssssssi', $name, $gender, $phone, $email, $comment, $date, $timeslot, $id_patient);
-            $stmt->execute();
-
-            $msg = "<div class='alert alert-success'>Booking Successful
-			
-			<script>
-				window.location='viewbooking.php';
-			</script>
-			
-			</div>";
-            $bookings[] = $timeslot;
-            $stmt->close();
-            $mysqli->close();
-        }
-    }
-}
-
-$duration = 60;
-$cleanup = 0;
-$start = "8:00";
-$end = "17:00";
-
-function timeslots($duration, $cleanup, $start, $end) {
-    $start = new DateTime($start);
-    $end = new DateTime($end);
-    $interval = new DateInterval("PT" . $duration . "M");
-    $cleanupInterval = new DateInterval("PT" . $cleanup . "M");
-    $slots = array();
-
-    for ($intStart = $start; $intStart < $end; $intStart->add($interval)->add($cleanupInterval)) {
-        $endPeriod = clone $intStart;
-        $endPeriod->add($interval);
-        if ($endPeriod > $end) {
-            break;
-        }
-
-        $slots[] = $intStart->format("H:iA") . "-" . $endPeriod->format("H:iA");
-    }
-    return $slots;
-}
 ?>
 
 <!DOCTYPE html>
@@ -182,12 +126,8 @@ function timeslots($duration, $cleanup, $start, $end) {
 		</nav>
 	</header>
 	<!-- End header -->
-	
-	<div class="all-title-box">
-		<div class="container text-center">
-			<h1>Masa Temujanji Anda<span class="m_1"></span></h1>
-		</div>
-	</div>
+	<br>
+	<BR>
 	
 	<div id="page-container" class="main-admin">
             <div class="container-fluid" id="main">
@@ -196,90 +136,76 @@ function timeslots($duration, $cleanup, $start, $end) {
 						
                         <hr>
                         <div class="container">
-                            <h1 class="text-center">Book for Date: <?php echo date('d/m/Y', strtotime($date)); ?></h1>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <?php echo (isset($msg)) ? $msg : ""; ?>
-                                </div>
-                                <?php
-                                $timeslots = timeslots($duration, $cleanup, $start, $end);
-                                foreach ($timeslots as $ts) {
-                                    ?>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <?php if (in_array($ts, $bookings)) { ?>
-                                                <button class="btn btn-danger"><?php echo $ts; ?></button>
-                                            <?php } else { ?>
-                                                <button class="btn btn-success book" data-timeslot="<?php echo $ts; ?>"><?php echo $ts; ?></button>
-                                            <?php } ?>
-                                        </div>
-                                    </div>
-                                <?php } ?>
-                            </div>
+                            <h1 class="text-center">Book for Date: <?php echo date('d/m/Y', strtotime($date)); ?></h1>                         
                         </div>
 				</center>
                         
-				<form action="" method="POST">
-                            <div id="myModal" class="modal fade" role="dialog">
-                                <div class="modal-dialog">
-                                    <!-- Modal content-->
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Booking: <span id="slot"></span></h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for=""><strong>Time Slot</strong></label>
-                                                        <input type="text" readonly name="timeslot" id="timeslot" class="form-control" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for=""><strong>Nama Penuh</strong></label>
-                                                        <input type="text" name="name" class="form-control" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for=""><strong>Jantina</strong></label>
-                                                        <select class="form-control" name="gender" id="gender" required> 
-                                                            <option value="" disabled selected hidden>Pilih Jantina</option>
-                                                            <option value="Lelaki">Lelaki</option>
-                                                            <option value="Perempuan">Perempuan</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for=""><strong>Number Telefon</strong></label>
-                                                        <input type="number" name="phone" class="form-control" required>
-                                                    </div>
-                                                </div>	
-												<div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for=""><strong>E-Mel</strong></label>
-                                                        <input type="text" name="email" class="form-control" required>
-                                                    </div>
-                                                </div>	
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for=""><strong>Nyatakan</strong></label>
-                                                        <input type="text" name="comment" class="form-control" required>
-                                                    </div>
-                                                    <div class="form-group pull-right">
-                                                        <a href="viewbooking.php"><button type="submit" class="btn btn-primary" name="submit">Submit</button></a>
-                                                    </div>
-                                                </div>
-                                            </div> 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+	<center>
+	<div class="col-lg-10">
+	<form action="maklumat.php" method="post" class="checkdomain form-inline" >	
+			<div class="card-body">
+		      		<table class="table table-striped table-bordered" >
+						<thead>
+			      			<tr>
+			      				<th><strong>Bilangan</th>
+			      				<th><strong>Slot</th>
+			      				<th><strong>Pilih</th>
+			      			</tr>
+						</thead>
+							<tr >
+								 <td>1</td>
+								 <td label for="9 am - 10 am" >09:00 am</label></td>
+								 <td><input type="radio"  name="timeslot" value="09:00 am"required /></td>
+							</tr> 
+							
+							<tr >
+								 <td>2</td>
+								 <td label for="10 am - 11 am">10:00 am</label></td>
+								 <td><input type="radio"  name="timeslot" value="10:00 am"></td>
+							</tr>
+							
+							<tr>
+								 <td>3</td>
+								 <td label for="11 am - 12 pm">11:00 am</label></td>
+								 <td><input type="radio"  name="timeslot" value="11:00 am"></td>
+							</tr>
+
+							<tr>
+								 <td>4</td>
+								 <td label for="12 pm - 1 pm">12:00 pm</label></td>
+								 <td><input type="radio"  name="timeslot" value="12:00 pm"></td>
+							</tr>
+
+							<tr >
+								 <td>5</td>
+								 <td label for="2 pm - 3 pm">02:00 pm</label></td>
+								 <td><input type="radio"  name="timeslot" value="02:00 pm"></td>
+							</tr>
+
+							<tr >
+								 <td>6</td>
+								 <td label for="3 pm - 4 pm">03:00 pm</label></td>
+								 <td><input type="radio"  name="timeslot" value="03:00 pm"></td>
+							</tr>
+
+							<tr>
+								 <td>7</td>
+								 <td label for="4 pm - 5 pm">04:00 pm</label></td>
+								 <td><input type="radio"  name="timeslot" value="04:00 pm"></td>
+							</tr>
+							
+							<tr>
+								 <td>8</td>
+								 <td label for="5 pm - 6 pm">05:00 pm</label><br></td>
+								 <td><input type="radio"  name="timeslot" value="05:00 pm"></td>
+							</tr>
+							
+			      	</table>
+					
+					<center><button type="submit" class="btn btn-primary" name="submit">Seterusnya</button>
+			    </div>
+			
+			 </form></div>
                        <hr>
 
                     </div>
