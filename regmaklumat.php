@@ -15,15 +15,21 @@ $query = "SELECT * FROM bookings WHERE date = '$date' AND timeslot = '$timeslot'
 $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
 $num_rows = mysqli_num_rows($result);
 if ($num_rows < 2) {
-	"INSERT INTO bookings (date, timeslot, name, email, ic, phone, gender, comment, id_patient) 
-	VALUES (?,?,?,?,?,?,?,?,?)";
+	$sql = "INSERT INTO bookings (date, timeslot, name, email, ic, phone, gender, comment, id_patient) 
+	VALUES ('$date', '$timeslot', '$name', '$email', '$ic', '$phone', '$gender',  '$comment', '$id_patient')";
+	echo "<div class='alert alert-success'>Tempahan Berjaya !
+			
+			<script>
+				window.location='viewbooking.php';
+			</script>
+			
+			</div>";
    }else{
 	    echo "<div class='form'>
 			  <h3>Sudah Penuh !</h3><br/>
 			  <p class='link'>Tekan <a href='timeslot.php'>Tempah</a> untuk menempah.</p>
 			  </div>";
    }
-	
 
 
 $sql = "INSERT INTO bookings (date, timeslot, name, email, ic, phone, gender, comment, id_patient) 
@@ -38,9 +44,3 @@ else {
 
 $conn->close();
 ?>
-
-<script>
-
-	window.location="viewbooking.php";
-
-</script>
