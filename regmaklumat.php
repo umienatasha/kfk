@@ -18,7 +18,10 @@ if ($num_rows < 2) {
 	"INSERT INTO bookings (date, timeslot, name, email, ic, phone, gender, comment, id_patient) 
 	VALUES (?,?,?,?,?,?,?,?,?)";
    }else{
-	   
+	    echo "<div class='form'>
+			  <h3>Sudah Penuh !</h3><br/>
+			  <p class='link'>Tekan <a href='timeslot.php'>Tempah</a> untuk menempah.</p>
+			  </div>";
    }
 	
 
