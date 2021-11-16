@@ -15,7 +15,6 @@ $query = "SELECT * FROM bookings WHERE date = '$date' AND timeslot = '$timeslot'
 $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
 $num_rows = mysqli_num_rows($result);
 if ($num_rows < 2) {
-   {
 	"INSERT INTO bookings (date, timeslot, name, email, ic, phone, gender, comment, id_patient) 
 	VALUES (?,?,?,?,?,?,?,?,?)";
    }else{
