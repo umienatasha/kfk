@@ -130,7 +130,7 @@ $username=$row['username'];
 				<div class="col col-md-10">
 					<div class="card">
 						<div class="card-body">
-							<form method="post" action="maklumat.php">
+							<form method="post" action="regtimeslot.php">
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
@@ -197,8 +197,7 @@ $username=$row['username'];
 								 <td><input type="radio"  name="timeslot" value="05:00 pm"></td>
 							</tr>	
 			      	</table>
-					
-					<center><button type="submit" class="btn btn-primary" name="submit">Seterusnya</button>
+					<center><button type="submit" class="btn btn-primary" name="submit" onclick="myFunction()">Seterusnya</button>
 			    </div>
 									
 							</form>
