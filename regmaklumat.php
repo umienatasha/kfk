@@ -11,6 +11,7 @@ $gender=$_POST['gender'];
 $comment=$_POST['comment'];
 $id_patient=$_SESSION['id_patient'];
 
+$query = "SELECT * FROM bookings WHERE date = '$date' AND timeslot = '$timeslot' ";
 
 $sql = "INSERT INTO bookings (date, timeslot, name, email, ic, phone, gender, comment, id_patient) 
 		VALUES ('$date', '$timeslot', '$name', '$email', '$ic', '$phone', '$gender',  '$comment', '$id_patient')";
