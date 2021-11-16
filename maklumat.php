@@ -1,12 +1,14 @@
 <?php
 include('connection.php');
 
-$date=$_POST['date'];
-$timeslot=$_POST['timeslot'];
+$date=$_GET['date'];
+$timeslot=$_GET['timeslot'];
 $id_patient=$_SESSION['id_patient'];
 
 $sql = "SELECT * FROM bookings WHERE date = '$date' AND timeslot = '$timeslot' ";
 $result = mysqli_query($conn, $sql);
+
+
 ?>
 
 <!DOCTYPE html>
