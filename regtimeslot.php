@@ -12,7 +12,8 @@ if ($num_rows < 2) {
 	$sql = "SELECT INTO bookings (date, timeslot) VALUES ('$date', '$timeslot')";
 	echo '<script type="text/javascript">
                       alert("Tarikh Kekosongan !");
-			location="maklumat.php";
+			location="maklumat.php?date=<?php echo $date ;?>&timeslot=<?php echo $timeslot ;?>";
+			
                         </script>';
    } else{
 		echo '<script type="text/javascript">
