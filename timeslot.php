@@ -125,30 +125,30 @@ $username=$row['username'];
 		<center><h1 class="my-5">Hey, <?php echo $username; ?>!</b>.</h1></center>
 	
 	<div id="page-container" class="main-admin">
-		<div class="container-fluid" id="main">
-			<div class="row justify-content-md-center">
-				<div class="col col-md-10">
-					<div class="card">
-						<div class="card-body">
-							<form method="post" action="regtimeslot.php">
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<label><strong>Tarikh</strong><span class="text-danger"></span></label>
-											<input type="date" name="date" class="form-control" data-parsley-trigger="keyup" required />
-										</div>
-									</div>
-								</div>
+	<div class="container-fluid" id="main">
+	<div class="row justify-content-md-center">
+	<div class="col col-md-10">
+		<div class="card">
+			<div class="card-body">
+				<form method="post" action="regtimeslot.php">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label><strong>Tarikh</strong><span class="text-danger"></span></label>
+								<input type="date" name="date" class="form-control" data-parsley-trigger="keyup" required />
+							</div>
+						</div>
+					</div>
 									
-				<div class="card-body">
-		      		<table class="table table-striped table-bordered" >
-						<thead>
-			      			<tr>
-			      				<th><strong>Bilangan</th>
-			      				<th><strong>Slot</th>
-			      				<th><strong>Pilih</th>
-			      			</tr>
-						</thead>
+					<div class="card-body">
+						<table class="table table-striped table-bordered" >
+							<thead>
+								<tr>
+									<th><strong>Bilangan</th>
+									<th><strong>Slot</th>
+									<th><strong>Pilih</th>
+								</tr>
+							</thead>
 							<tr >
 								 <td>1</td>
 								 <td label for="9 am - 10 am" >09:00 am</label></td>
@@ -197,7 +197,7 @@ $username=$row['username'];
 								 <td><input type="radio"  name="timeslot" value="05:00 pm"></td>
 							</tr>	
 			      	</table>
-					<center><button type="submit" class="btn btn-primary" name="submit" onclick="myFunction()">Seterusnya</button>
+					<center><button type="submit" class="btn btn-primary" name="submit">Seterusnya</button>
 			    </div>
 									
 							</form>
