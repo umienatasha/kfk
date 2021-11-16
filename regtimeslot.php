@@ -20,4 +20,7 @@ if ($num_rows < 2) {
 			location="timeslot.php";
                         </script>';
 	}
+	
+$sql = "SELECT * FROM bookings WHERE date = '$date' AND timeslot = '$timeslot' ";
+$result = mysqli_query($conn, $sql);
 ?>
