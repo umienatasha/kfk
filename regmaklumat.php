@@ -1,9 +1,6 @@
 <?php 
 include('connection.php');
 
-
-
-
 $date=$_POST['date'];
 $timeslot=$_POST['timeslot'];
 $name=$_POST['name'];
