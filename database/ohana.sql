@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 02, 2021 at 03:05 PM
+-- Generation Time: Nov 16, 2021 at 12:18 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -25,6 +25,25 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id_admin` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id_admin`, `username`, `password`) VALUES
+(1, 'Admin', 'admin');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `bookings`
 --
 
@@ -37,6 +56,7 @@ CREATE TABLE `bookings` (
   `phone` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `comment` varchar(50) NOT NULL,
+  `ic` varchar(50) NOT NULL,
   `id_patient` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -44,11 +64,12 @@ CREATE TABLE `bookings` (
 -- Dumping data for table `bookings`
 --
 
-INSERT INTO `bookings` (`id_book`, `date`, `timeslot`, `name`, `gender`, `phone`, `email`, `comment`, `id_patient`) VALUES
-(40, '2021-11-22', '08:00AM-09:00AM', 'Umi Natasha Binti Abdul Munaim', 'Perempuan', '0123456789', 'uminatasha22@gmail.com', 'sakit bahu', 0),
-(41, '2021-11-25', '10:00AM-11:00AM', 'Siti Sarah', 'Perempuan', '0123456789', 'Siti@gmail.com', 'demam', 0),
-(42, '2021-11-04', '10:00AM-11:00AM', 'Siti Sarah', 'Perempuan', '0123456789', 'Siti@gmail.com', 'sakit bahu', 0),
-(43, '2021-11-03', '08:00AM-09:00AM', 'Fatimah Ahmad', 'Perempuan', '0123456789', 'fatimah@gmail.com', 'sakit bahu', 0);
+INSERT INTO `bookings` (`id_book`, `date`, `timeslot`, `name`, `gender`, `phone`, `email`, `comment`, `ic`, `id_patient`) VALUES
+(67, '2021-11-20', '04:30', 'Siti Sarah Binti Abdullah Ahmad', 'Male', '0123456789', 'Sitisarahahmad@gmail.com', 'sakit belakang', '9900102020', 24),
+(79, '2021-11-22', '03:00 pm', 'Umi Natasha Binti Abdul Munaim', 'Perempuan', '0123456789', 'uminatasha22@gmail.com', 'sakit belakang', '001122020910', 23),
+(80, '2021-11-29', '05:00 pm', 'Ahmad Bin Abu', 'Lelaki', '0123456789', 'ahmad@gmail.com', 'sakit bahu', '880111020901', 26),
+(88, '2021-11-17', '05:00 pm', 'Ahmad Bin Abu', 'Lelaki', '0123456789', 'ahmad@gmail.com', 'sakit bahu', '880111020901', 26),
+(89, '2021-11-17', '05:00 pm', 'Umi Natasha Binti Abdul Munaim', 'Lelaki', '0123456789', 'uminatasha22@gmail.com', 'sakit kepala', '001122020910', 23);
 
 -- --------------------------------------------------------
 
@@ -89,7 +110,11 @@ CREATE TABLE `tblpatient` (
   `id_patient` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `phone` varchar(50) NOT NULL,
+  `address` varchar(150) NOT NULL,
+  `gender` varchar(50) NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `ic` varchar(50) NOT NULL,
   `create_datetime` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -97,15 +122,21 @@ CREATE TABLE `tblpatient` (
 -- Dumping data for table `tblpatient`
 --
 
-INSERT INTO `tblpatient` (`id_patient`, `username`, `email`, `password`, `create_datetime`) VALUES
-(2, 'Sarah', 'sitisarah@gmail.com', '9e9d7a08e048e9d604b79460b54969c3', '2021-11-02 02:12:26'),
-(4, 'Natasha', 'uminatasha22@gmail.com', '6275e26419211d1f526e674d97110e15', '2021-11-02 03:25:24'),
-(6, 'Ahmad', 'ahmad@gmail.com', '61243c7b9a4022cb3f8dc3106767ed12', '2021-11-02 12:13:28'),
-(8, 'fatimah', 'fatimah@gmail.com', '3610528e7fee68c6ffb0445603ef2c8e', '2021-11-02 13:59:23');
+INSERT INTO `tblpatient` (`id_patient`, `username`, `email`, `phone`, `address`, `gender`, `name`, `ic`, `create_datetime`) VALUES
+(23, 'Natasha', 'uminatasha22@gmail.com', '0182534421', 'Arau, Perlis', 'Female', 'Umi Natasha Binti Abdul Munaim', '001122020910', '2021-11-09 09:46:28'),
+(25, 'Sarah', 'Sitisarahabdullah@gmail.com', '0123456780', 'Kangar, Perlis', 'Male', 'Siti Sarah Binti Abdullah Ahmad', '9900102022', '2021-11-10 05:26:36'),
+(26, 'Ahmad', 'ahmad@gmail.com', '0123456789', 'Kampung Gial, Mata Ayer 02500 Perlis', 'Male', 'Ahmad Bin Abu', '880111020901', '2021-11-12 09:51:22'),
+(27, 'Kalsom', 'uminatasha22@gmail.com', '0123456789', 'Arau, Perlis', 'Female', 'Umi Kalsom Binti Ahmad', '740116025298', '2021-11-13 05:05:25');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id_admin`);
 
 --
 -- Indexes for table `bookings`
@@ -130,10 +161,16 @@ ALTER TABLE `tblpatient`
 --
 
 --
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `id_book` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id_book` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- AUTO_INCREMENT for table `loginuser`
@@ -145,7 +182,7 @@ ALTER TABLE `loginuser`
 -- AUTO_INCREMENT for table `tblpatient`
 --
 ALTER TABLE `tblpatient`
-  MODIFY `id_patient` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_patient` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
