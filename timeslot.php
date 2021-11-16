@@ -197,7 +197,7 @@ $username=$row['username'];
 								 <td><input type="radio"  name="timeslot" value="05:00 pm"></td>
 							</tr>	
 			      	</table>
-					<center><button type="submit" class="btn btn-primary" name="submit">Seterusnya</button>
+					<center><button type="submit" class="btn btn-primary" name="submit" onclick="myFunction()">Seterusnya</button>
 			    </div>
 									
 							</form>
