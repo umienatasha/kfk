@@ -135,6 +135,7 @@
 							<div class="form-group">
 									<input type="submit" name="submit"  class="btn btn-info btn-md" value="Login">
 									<p>Tidak Mempunyai Akaun ? <a href="register.php">Daftar</a>.<p>																						
+									<p> <a href="#">Lupa Kata Laluan ?</a><p>																						
 							</div>
 					</form>	
 				</div>
