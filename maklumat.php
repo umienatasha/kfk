@@ -8,7 +8,6 @@ $id_patient=$_SESSION['id_patient'];
 $sql = "SELECT * FROM bookings WHERE date = '$date' AND timeslot = '$timeslot' ";
 $result = mysqli_query($conn, $sql);
 
-
 ?>
 
 <!DOCTYPE html>
