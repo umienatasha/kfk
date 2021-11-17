@@ -10,6 +10,8 @@ $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
 $num_rows = mysqli_num_rows($result);
 if ($num_rows < 2) {
 	$sql = "SELECT INTO bookings (date, timeslot) VALUES ('$date', '$timeslot')";
+	?>
+	
 	echo '<script type="text/javascript">
                       alert("Tarikh Kekosongan !");
 			location="maklumat.php?date=<?php echo $date ;?>&timeslot=<?php echo $timeslot ;?>";
