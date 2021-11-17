@@ -37,10 +37,11 @@
 			<th>04:00</th>
 			<th>05:00</th>
 		  </tr>
+		  
 		  <tr>
 			<td>Khamis</td>
 			<td>18.11.21</td>
-			<td></td>
+			<td name="timeslot"><a href="maklumat.php?date=<?php echo $date ;?>&timeslot=<?php echo $timeslot ;?>">Book</a></td>
 			<td></td>
 			<td></td>
 			<td></td>
@@ -49,6 +50,7 @@
 			<td></td>
 			<td></td>
 		  </tr>
+		  
 		  <tr>
 			<td>Jumaat</td>
 			<td>19.11.21</td>
@@ -61,6 +63,7 @@
 			<td></td>
 			<td></td>
 		  </tr>
+		  
 		  <tr>
 			<td>Sabtu</td>
 			<td>20.11.21</td>
@@ -68,23 +71,25 @@
 			<td></td>
 			<td></td>
 			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
+			<td style="background-color:#ff0000;"></td>
+			<td style="background-color:#ff0000;"></td>
+			<td style="background-color:#ff0000;"></td>
+			<td style="background-color:#ff0000;"></td>
 		  </tr>
+		  
 		  <tr>
 			<td>Ahad</td>
 			<td>21.11.21</td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
+			<td style="background-color:#ff0000;"></td>
+			<td style="background-color:#ff0000;"></td>
+			<td style="background-color:#ff0000;"></td>
+			<td style="background-color:#ff0000;"></td>
+			<td style="background-color:#ff0000;"></td>
+			<td style="background-color:#ff0000;"></td>
+			<td style="background-color:#ff0000;"></td>
+			<td style="background-color:#ff0000;"></td>
 		  </tr>
+		  
 		  <tr>
 			<td>Isnin</td>
 			<td>22.11.21</td>
@@ -97,6 +102,7 @@
 			<td></td>
 			<td></td>
 		  </tr>
+		  
 		  <tr>
 			<td>Selasa</td>
 			<td>23.11.21</td>
