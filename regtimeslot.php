@@ -13,14 +13,14 @@ if ($num_rows < 2) {
 	<script type="text/javascript">
 		  alert("Tarikh Kekosongan !");
 	      location="maklumat.php?date=<?php echo $date ;?>&timeslot=<?php echo $timeslot ;?>";
-	</script>';
+	</script>
 <?php
 	} else{
 ?>
 	<script type="text/javascript">
           alert("Tempahan Sudah Penuh !");
 		  location="timeslot.php";
-    </script>';
+    </script>
 <?php
 	}
 ?>
