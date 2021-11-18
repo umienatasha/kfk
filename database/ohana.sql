@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 16, 2021 at 12:18 PM
+-- Generation Time: Nov 18, 2021 at 06:00 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -69,7 +69,9 @@ INSERT INTO `bookings` (`id_book`, `date`, `timeslot`, `name`, `gender`, `phone`
 (79, '2021-11-22', '03:00 pm', 'Umi Natasha Binti Abdul Munaim', 'Perempuan', '0123456789', 'uminatasha22@gmail.com', 'sakit belakang', '001122020910', 23),
 (80, '2021-11-29', '05:00 pm', 'Ahmad Bin Abu', 'Lelaki', '0123456789', 'ahmad@gmail.com', 'sakit bahu', '880111020901', 26),
 (88, '2021-11-17', '05:00 pm', 'Ahmad Bin Abu', 'Lelaki', '0123456789', 'ahmad@gmail.com', 'sakit bahu', '880111020901', 26),
-(89, '2021-11-17', '05:00 pm', 'Umi Natasha Binti Abdul Munaim', 'Lelaki', '0123456789', 'uminatasha22@gmail.com', 'sakit kepala', '001122020910', 23);
+(89, '2021-11-17', '05:00 pm', 'Umi Natasha Binti Abdul Munaim', 'Lelaki', '0123456789', 'uminatasha22@gmail.com', 'sakit kepala', '001122020910', 23),
+(90, '2021-11-18', '04:00 pm', 'Siti Sarah Binti Abdullah Ahmad', 'Perempuan', '0123456789', 'Sitisarahahmad@gmail.com', 'sakit belakang', '9900102022', 25),
+(91, '2021-11-17', '04:00 pm', 'Siti Sarah Binti Abdullah Ahmad', 'Perempuan', '0123456789', 'Sitisarahahmad@gmail.com', 'sakit kepala', '9900102022', 25);
 
 -- --------------------------------------------------------
 
@@ -128,6 +130,18 @@ INSERT INTO `tblpatient` (`id_patient`, `username`, `email`, `phone`, `address`,
 (26, 'Ahmad', 'ahmad@gmail.com', '0123456789', 'Kampung Gial, Mata Ayer 02500 Perlis', 'Male', 'Ahmad Bin Abu', '880111020901', '2021-11-12 09:51:22'),
 (27, 'Kalsom', 'uminatasha22@gmail.com', '0123456789', 'Arau, Perlis', 'Female', 'Umi Kalsom Binti Ahmad', '740116025298', '2021-11-13 05:05:25');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_cuti_umum`
+--
+
+CREATE TABLE `tbl_cuti_umum` (
+  `id_cuti_umum` int(11) NOT NULL,
+  `tarikh` date NOT NULL,
+  `sebab` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 --
 -- Indexes for dumped tables
 --
@@ -157,6 +171,13 @@ ALTER TABLE `tblpatient`
   ADD PRIMARY KEY (`id_patient`);
 
 --
+-- Indexes for table `tbl_cuti_umum`
+--
+ALTER TABLE `tbl_cuti_umum`
+  ADD PRIMARY KEY (`id_cuti_umum`),
+  ADD UNIQUE KEY `tarikh` (`tarikh`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -170,7 +191,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `id_book` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `id_book` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT for table `loginuser`
@@ -183,6 +204,12 @@ ALTER TABLE `loginuser`
 --
 ALTER TABLE `tblpatient`
   MODIFY `id_patient` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT for table `tbl_cuti_umum`
+--
+ALTER TABLE `tbl_cuti_umum`
+  MODIFY `id_cuti_umum` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
