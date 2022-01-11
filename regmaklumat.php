@@ -17,7 +17,7 @@ $num_rows = mysqli_num_rows($result);
 if ($num_rows < 2) {
 	$sql = "INSERT INTO bookings (date, timeslot, name, email, ic, phone, gender, comment, id_patient) 
 	VALUES ('$date', '$timeslot', '$name', '$email', '$ic', '$phone', '$gender',  '$comment', '$id_patient')";
-	echo "<div class='alert alert-success'>Tempahan Berjaya !
+	echo "<div class='alert alert-success'>Tempahan Anda Berjaya !
 			
 			<script>
 				window.location='viewbooking.php';
@@ -26,7 +26,7 @@ if ($num_rows < 2) {
 			</div>";
    }else{
 	    echo "<div class='form'>
-			  <h3>Sudah Penuh !</h3><br/>
+			  <h3>Maaf, Tempahan Yang Anda Pilih Tidak Berjaya Atas Persesilihan Tempahan Dengan Pesakit Lain !</h3><br/>
 			  <p class='link'>Tekan <a href='timeslot.php'>Tempah</a> untuk menempah.</p>
 			  </div>";
    }

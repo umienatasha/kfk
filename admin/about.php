@@ -67,14 +67,6 @@
 				<div class="collapse navbar-collapse" id="navbars-host">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item"><a class="nav-link" href="admin.php">Home</a></li>
-						<li class="nav-item dropdown active">
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">About Ohana </a>
-							<div class="dropdown-menu" aria-labelledby="dropdown-a">
-								<a class="dropdown-item" href="about.php">Latar Belakang</a>
-								<a class="dropdown-item" href="hosting.php">List Treatments</a>
-								<a class="dropdown-item" href="gallery.php">Gallery</a>
-							</div>
-						</li>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Patient </a>
 							<div class="dropdown-menu" aria-labelledby="dropdown-a">								

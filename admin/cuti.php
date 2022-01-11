@@ -16,13 +16,6 @@ if (!$conn)
 	die("Connection failed: " . mysqli_connect_error());
 }
 
-
-$id_patient=$_GET["id"];
-
-$dis_usr="SELECT * FROM tblpatient WHERE id_patient='$id_patient'";
-$resultusr=$conn->query($dis_usr);
-
-$row=$resultusr->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +29,7 @@ $row=$resultusr->fetch_assoc();
     <meta name="viewport" content="width=device-width, initial-scale=1">
  
      <!-- Site Metas -->
-    <title>Update Patient</title> 
+    <title>Public Holiday</title> 
 	
 
     <meta name="keywords" content="">
@@ -95,9 +88,9 @@ $row=$resultusr->fetch_assoc();
 				<div class="collapse navbar-collapse" id="navbars-host">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item"><a class="nav-link" href="admin.php">Home</a></li>
-						<li class="nav-item active"><a class="nav-link" href="viewpatient.php">List Patient</a></li>
+						<li class="nav-item"><a class="nav-link" href="viewpatient.php">List Patient</a></li>
 						<li class="nav-item"><a class="nav-link" href="viewbooking.php">List Appointment</a></li>
-						<li class="nav-item"><a class="nav-link" href="cuti.php">Public Holiday</a></li>
+						<li class="nav-item active"><a class="nav-link" href="cuti.php">Public Holiday</a></li>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" id="dropdown-a" data-toggle="dropdown"><strong>Welcome, <?php echo $_SESSION['username'];?></b> !</strong> </a>
 							<div class="dropdown-menu" aria-labelledby="dropdown-a">
@@ -120,62 +113,28 @@ $row=$resultusr->fetch_assoc();
 				<div class="card-header">
 					<div class="row">
 						<div class="col-md-6">
-							Edit Profile Details
+							Public Holiday
 						</div>
 						<div class="col-md-6 text-right">
-							<a href="display.php?id=<?php echo $row["id_patient"]; ?>" class="btn btn-secondary btn-sm">View</a>
+							<a href="viewcuti.php" class="btn btn-secondary btn-sm">View</a>
 						</div>
 					</div>
 				</div>
 				<div class="card-body">
-					<form method="post" action="updatepatient.php">
-						<div class="form-group">
-							<label><strong>Patient Name</strong><span class="text-danger">*</span></label>
-							<input type="text" name="name"  class="form-control" value="<?php echo $row["name"];?>" required autofocus data-parsley-type="name" data-parsley-trigger="keyup" readonly />
-						</div>
-						<div class="form-group">
-							<label><strong>Patient Email</strong><span class="text-danger">*</span></label>
-							<input type="text" name="email" class="form-control" value="<?php echo $row["email"];?>" required  data-parsley-trigger="keyup" />
-						</div>
+					<form method="post" action="regcuti.php">
 						<div class="row">
 							<div class="col-md-6">
-								<div class="form-group">
-									<label><strong>Identity Card</strong><span class="text-danger">*</span></label>
-									<input type="text" name="ic" class="form-control" value="<?php echo $row["ic"];?>" required  data-parsley-trigger="keyup" />
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label><strong>Password</strong><span class="text-danger">*</span></label>
-									<input type="text" name="password" class="form-control" value="<?php echo $row["password"];?>" required  data-parsley-trigger="keyup" />
-								</div>
+							<label><strong>Date Holiday</strong><span class="text-danger">*</span></label>
+							<input type="date" name="tarikh"  class="form-control"  required autofocus data-parsley-trigger="keyup" />
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-									<label><strong>Patient Contact No.</strong><span class="text-danger">*</span></label>
-									<input type="number" name="phone" class="form-control" value="<?php echo $row["phone"];?>" required  data-parsley-trigger="keyup" />
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label><strong>Patient Gender</strong><span class="text-danger">*</span></label>
-									<select name="gender" class="form-control" value="<?php echo $row["gender"];?>" >
-										<option value="Male">Male</option>
-										<option value="Female">Female</option>
-										<option value="Other">Other</option>
-									</select>
-								</div>
-							</div>
-						</div>
+						<br>
 						<div class="form-group">
-							<label><strong>Patient Complete Address</strong><span class="text-danger">*</span></label>
-							<input type="text" name="address" class="form-control" value="<?php echo $row["address"];?>" required data-parsley-trigger="keyup"></textarea>
+							<label><strong>Reason Holiday</strong><span class="text-danger">*</span></label>
+							<input type="text" name="sebab" class="form-control"  required  data-parsley-trigger="keyup" />
 						</div>
 						<div class="form-group text-center">
-							<input type="submit" class="btn btn-primary" value="Update" />
-							<input type="hidden" name="id" value="<?php echo $row["id_patient"]; ?>"/>
+							<input type="submit" class="btn btn-primary" value="Submit" />
 						</div>
 					</form>
 				</div>

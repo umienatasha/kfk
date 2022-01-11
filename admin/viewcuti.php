@@ -1,9 +1,21 @@
 <?php
-include('connection.php');
+session_start();
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "ohana";
 
-$id_patient=$_SESSION['id_patient'];
 
-$sql = "SELECT * FROM bookings WHERE id_patient='$id_patient'";
+// Create connection
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+
+// Check connection
+if (!$conn)
+{
+	die("Connection failed: " . mysqli_connect_error());
+}
+
+$sql = "SELECT * FROM tbl_cuti_umum";
 $result = mysqli_query($conn, $sql);
 ?>
 
@@ -114,10 +126,18 @@ $result = mysqli_query($conn, $sql);
                     <span class="icon-bar"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbars-host">
-					<ul class="navbar-nav ml-auto">					
-						<li class="nav-item"><a class="nav-link" href="slot.php">Book Appointment</a></li>																									
-						<li class="nav-item active"><a class="nav-link" href="viewbooking.php">My Appointment</a></li>																									
-						<li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>										
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item"><a class="nav-link" href="admin.php">Home</a></li>
+						<li class="nav-item"><a class="nav-link" href="viewpatient.php">List Patient</a></li>
+						<li class="nav-item"><a class="nav-link" href="viewbooking.php">List Appointment</a></li>
+						<li class="nav-item active"><a class="nav-link" href="cuti.php">Public Holiday</a></li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" id="dropdown-a" data-toggle="dropdown"><strong>Welcome, <?php echo $_SESSION['username'];?></b> !</strong> </a>
+							<div class="dropdown-menu" aria-labelledby="dropdown-a">
+								<a class="dropdown-item" href="#">Profile</a>
+								<a class="dropdown-item" href="logout.php">Logout </a>
+							</div>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -137,9 +157,9 @@ $result = mysqli_query($conn, $sql);
 		      		<table class="table table-striped table-bordered" id="appointment_list_table">
 		      			<thead>
 			      			<tr>
-			      				<th><strong>DATE</th>
-			      				<th><strong>TIME SLOT</th>
-			      				<th><strong>PATIENT NAME</th>
+			      				<th><strong>ID</th>
+			      				<th><strong>DATE HOLIDAY</th>
+			      				<th><strong>REASONS HOLIDAY</th>
 			      				<th><strong>ACTION</th>
 			      			</tr>
 			      		</thead>
@@ -155,13 +175,14 @@ $result = mysqli_query($conn, $sql);
 						<tbody>
 						
 							<tr class="row100">
-								<td><?php echo $row['date']; ?></td>
-								<td><?php echo $row['timeslot']; ?></td>
-								<td><?php echo $row['name']; ?></td>
+								<td><?php echo $row['id_cuti_umum']; ?></td>
+								<td><?php echo $row['tarikh']; ?></td>
+								<td><?php echo $row['sebab']; ?></td>
 								
 								<td>				
 									<center>												
-									<button><a href="display.php?id=<?php echo $row["id_book"]; ?>" class="btn btn-danger delete-listview-btn" onClick="return confirm">View</a></button>
+									<button><a href="updatecuti.php?id=<?php echo $row["id_cuti_umum"]; ?>" class="btn btn-danger delete-listview-btn" onClick="return confirm">Update</a></button>
+									<button><a href="deletecuti.php?id=<?php echo $row["id_cuti_umum"]; ?>" class="btn btn-danger delete-listview-btn" onClick="return confirm('Do you really want to delete?');">Delete</a></button>
 									</center>	
 								</td>
 							</tr>					
@@ -190,57 +211,6 @@ $result = mysqli_query($conn, $sql);
 	</div>
  </form>
                 </div> 
-	
-	
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-xs-12">
-                    <div class="widget clearfix">
-                        <div class="widget-title">
-                            <h3>About US</h3>
-                        </div>
-                        <p> Integer rutrum ligula eu dignissim laoreet. Pellentesque venenatis nibh sed tellus faucibus bibendum. Sed fermentum est vitae rhoncus molestie. Cum sociis natoque penatibus et magnis dis montes.</p>
-                        <p>Sed fermentum est vitae rhoncus molestie. Cum sociis natoque penatibus et magnis dis montes.</p>
-                    </div><!-- end clearfix -->
-                </div><!-- end col -->
-
-				<div class="col-lg-4 col-md-4 col-xs-12">
-                    <div class="widget clearfix">
-                        <div class="widget-title">
-                            <h3>Information Link</h3>
-                        </div>
-                        <ul class="footer-links">
-                            <li><a href="index.php">Home</a></li>
-							<li><a href="about.php">Tentang Kami</a></li>
-							<li><a href="hosting.php">Rawatan</a></li>
-							<li><a href="contact.php">Contact</a></li>
-                        </ul><!-- end links -->
-                    </div><!-- end clearfix -->
-                </div><!-- end col -->
-				
-                <div class="col-lg-4 col-md-4 col-xs-12">
-                    <div class="widget clearfix">
-                        <div class="widget-title">
-                            <h3>Contact Details</h3>
-                        </div>
-
-                        <ul class="footer-links">
-                            <li><a href="mailto:#">info@yoursite.com</a></li>
-                            <li><a href="#">www.facebook.com</a></li>
-                            <li> Pusat Bandar Kangar, 01000 Kangar, Perlis</li>
-                            <li>+604-976 7366</li>
-                        </ul><!-- end links -->
-                    </div><!-- end clearfix -->
-                </div><!-- end col -->
-				
-            </div><!-- end row -->
-        </div><!-- end container -->
-    </footer><!-- end footer -->
-	
-	
-	
-	
 	
 	<script>
                         // sandbox disable popups

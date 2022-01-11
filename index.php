@@ -254,8 +254,7 @@
                         <div class="widget-title">
                             <h3>About US</h3>
                         </div>
-                        <p> Integer rutrum ligula eu dignissim laoreet. Pellentesque venenatis nibh sed tellus faucibus bibendum. Sed fermentum est vitae rhoncus molestie. Cum sociis natoque penatibus et magnis dis montes.</p>
-                        <p>Sed fermentum est vitae rhoncus molestie. Cum sociis natoque penatibus et magnis dis montes.</p>
+                        <p>Ohana Physiotherapy sebuah pusat rawatan rehabilitasi yang menyediakan kaedah perawatan klinikal menggunakan terapi mesin dan urutan terapeutik.</p>
                     </div><!-- end clearfix -->
                 </div><!-- end col -->
 
@@ -280,8 +279,8 @@
                         </div>
 
                         <ul class="footer-links">
-                            <li><a href="mailto:#">info@yoursite.com</a></li>
-                            <li><a href="#">www.facebook.com</a></li>
+                            <li><a href="tel:+604-976 7366">+604-976 7366</a></li>
+                            <li><a href="https://www.facebook.com/klinikfaizahkangar/">facebook</a></li>
                             <li> Pusat Bandar Kangar, 01000 Kangar, Perlis</li>
                             <li>+604-976 7366</li>
                         </ul><!-- end links -->

@@ -95,29 +95,17 @@ $row=$resultusr->fetch_assoc();
 				<div class="collapse navbar-collapse" id="navbars-host">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item"><a class="nav-link" href="admin.php">Home</a></li>
+						<li class="nav-item"><a class="nav-link" href="viewpatient.php">List Patient</a></li>
+						<li class="nav-item active"><a class="nav-link" href="viewbooking.php">List Appointment</a></li>
+						<li class="nav-item"><a class="nav-link" href="cuti.php">Public Holiday</a></li>
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">About Ohana </a>
+							<a class="nav-link dropdown-toggle" id="dropdown-a" data-toggle="dropdown"><strong>Welcome, <?php echo $_SESSION['username'];?></b> !</strong> </a>
 							<div class="dropdown-menu" aria-labelledby="dropdown-a">
-								<a class="dropdown-item" href="about.php">Latar Belakang</a>
-								<a class="dropdown-item" href="hosting.php">List Treatments</a>
-								<a class="dropdown-item" href="gallery.php">Gallery</a>
+								<a class="dropdown-item" href="#">Profile</a>
+								<a class="dropdown-item" href="logout.php">Logout </a>
 							</div>
 						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Patient </a>
-							<div class="dropdown-menu" aria-labelledby="dropdown-a">							
-								<a class="dropdown-item" href="viewpatient.php">Details Patient </a>								
-							</div>
-						</li>
-						<li class="nav-item dropdown active">
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Bookings </a>
-							<div class="dropdown-menu" aria-labelledby="dropdown-a">
-								<a class="dropdown-item" href="viewbooking.php">Treatments Booking</a>								
-							</div>
-						</li>
-						<li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>
-					</ul>
-					
+					</ul>				
 				</div>
 			</div>
 		</nav>
@@ -168,7 +156,7 @@ $row=$resultusr->fetch_assoc();
 							<div class="col-md-4">
 								<div class="form-group">
 									<label><strong>Time</strong><span class="text-danger">*</span></label>
-									<input type="time" name="timeslot" class="form-control" value="<?php echo $row["timeslot"];?>" required  data-parsley-trigger="keyup" />
+									<input type="timeslot" name="timeslot" class="form-control" value="<?php echo $row["timeslot"];?>" required  data-parsley-trigger="keyup" />
 								</div>
 							</div>
 							<div class="col-md-4">

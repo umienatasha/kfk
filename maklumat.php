@@ -79,7 +79,7 @@ $result = mysqli_query($conn, $sql);
 				</button>
 				<div class="collapse navbar-collapse" id="navbars-host">
 					<ul class="navbar-nav ml-auto">					
-						<li class="nav-item active"><a class="nav-link" href="timeslot.php">Book Appointment</a></li>																									
+						<li class="nav-item active"><a class="nav-link" href="slot.php">Book Appointment</a></li>																									
 						<li class="nav-item"><a class="nav-link" href="viewbooking.php">My Appointment</a></li>																									
 						<li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>											
 					</ul>
@@ -151,7 +151,8 @@ $result = mysqli_query($conn, $sql);
 							<div class="col-md-6">
 								<div class="form-group">
 									<label><strong>Jantina</strong><span class="text-danger">*</span></label>
-									<select name="gender" class="form-control" value="" >
+									<select name="gender" class="form-control" required />
+									    <option value="" disabled selected hidden>Pilih Jantina</option>
 										<option value="Lelaki">Lelaki</option>
 										<option value="Perempuan">Perempuan</option>
 									</select>

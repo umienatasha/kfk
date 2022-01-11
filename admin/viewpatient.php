@@ -52,16 +52,16 @@ function filterTable($query)
     <meta name="description" content="">
     <meta name="author" content="">
 
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <!------ Include the above in your HEAD tag ---------->
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" />
-        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<!------ Include the above in your HEAD tag ---------->
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" />
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
 
-		<meta charset="UTF-8">
+	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
@@ -314,40 +314,23 @@ function filterTable($query)
 				<div class="collapse navbar-collapse" id="navbars-host">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item"><a class="nav-link" href="admin.php">Home</a></li>
+						<li class="nav-item active"><a class="nav-link" href="viewpatient.php">List Patient</a></li>
+						<li class="nav-item"><a class="nav-link" href="viewbooking.php">List Appointment</a></li>
+						<li class="nav-item"><a class="nav-link" href="cuti.php">Public Holiday</a></li>
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">About Ohana </a>
+							<a class="nav-link dropdown-toggle" id="dropdown-a" data-toggle="dropdown"><strong>Welcome, <?php echo $_SESSION['username'];?></b> !</strong> </a>
 							<div class="dropdown-menu" aria-labelledby="dropdown-a">
-								<a class="dropdown-item" href="about.php">Latar Belakang</a>
-								<a class="dropdown-item" href="hosting.php">List Treatments</a>
-								<a class="dropdown-item" href="gallery.php">Gallery</a>
+								<a class="dropdown-item" href="#">Profile</a>
+								<a class="dropdown-item" href="logout.php">Logout </a>
 							</div>
 						</li>
-						<li class="nav-item dropdown active">
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Patient </a>
-							<div class="dropdown-menu" aria-labelledby="dropdown-a">								
-								<a class="dropdown-item" href="viewpatient.php">Details Patient </a>								
-							</div>
-						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Bookings </a>
-							<div class="dropdown-menu" aria-labelledby="dropdown-a">						
-								<a class="dropdown-item" href="viewbooking.php">View Treatments Booking</a>								
-							</div>
-						</li>
-						<li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>
 					</ul>
 				</div>
 			</div>
 		</nav>
 	</header>
 	<!-- End header -->
-	
-	<div class="all-title-box">
-		<div class="container text-center">
-			<h1>Details Patient<span class="m_1"></span></h1>
-		</div>
-	</div>
-	
+
 	<div class="col-lg-12">
 	<form action="viewpatient.php" method="post" class="checkdomain form-inline" >
 		<div class="checkdomain-wrapper">
@@ -361,166 +344,119 @@ function filterTable($query)
 		</div><!-- end checkdomain-wrapper -->
                       
 	
-	<div class="card-body">
-				<div class="table-responsive">
-		      		<table class="table table-striped table-bordered" id="appointment_list_table">
-		      			<thead>
-			      			<tr>
-			      				<th><strong>NAME</th>
-								<th><strong>IDENTITY CARD</th>
-			      				<th><strong>CONTACT NUMBER</th>							
-			      				<th><strong>ACTION</th>
-			      			</tr>
-			      		</thead>
+		<div class="card-body">
+			<div class="table-responsive">
+				<table class="table table-striped table-bordered" id="appointment_list_table">
+					<thead>
+						<tr>
+							<th><strong>ID</th>
+							<th><strong>NAME</th>
+							<th><strong>IDENTITY CARD</th>						
+							<th><strong>ACTION</th>
+						</tr>
+					</thead>
 						
-						<?php
-							if(mysqli_num_rows($result) > 0)
-							{
-							while($row = mysqli_fetch_assoc($result))
-							{											
+					<?php
+						if(mysqli_num_rows($result) > 0)
+						{
+						while($row = mysqli_fetch_assoc($result))
+						{											
 
-						?>
+					?>
 						
-						<tbody>
-						<?php while($row = mysqli_fetch_array($search_result)):?>
-							<tr class="row100">
-								<td><?php echo $row['name']; ?></td>
-								<td><?php echo $row['ic']; ?></td>							
-								<td><?php echo $row['phone']; ?></td>							
-								<td>				
-									<center>												
-									<button><a href="display.php?id=<?php echo $row["id_patient"]; ?>" class="btn btn-danger delete-listview-btn" onClick="return confirm">View</a></button>
-									<button><a href="deletepatient.php?id=<?php echo $row["id_patient"]; ?>" class="btn btn-danger delete-listview-btn" onClick="return confirm('Do you really want to delete?');">Delete</a></button>
-									
-									</center>	
-								</td>
-							</tr>	
-								<?php endwhile;?>							
-						</tbody>
+					<tbody>
+					<?php while($row = mysqli_fetch_array($search_result)):?>
+						<tr class="row100">
+							<td><?php echo $row['id_patient']; ?></td>
+							<td><?php echo $row['name']; ?></td>
+							<td><?php echo $row['ic']; ?></td>														
+							<td>				
+								<center>												
+								<button><a href="display.php?id=<?php echo $row["id_patient"]; ?>" class="btn btn-danger delete-listview-btn" onClick="return confirm">Detail</a></button>
+								<button><a href="deletepatient.php?id=<?php echo $row["id_patient"]; ?>" class="btn btn-danger delete-listview-btn" onClick="return confirm('Do you really want to delete?');">Delete</a></button>
+								
+								</center>	
+							</td>
+						</tr>	
+							<?php endwhile;?>							
+					</tbody>
 						
-						<?php
-							   }
-							}
-							else 
-							{
-							   echo "0 results";
-							}
+					<?php
+						   }
+						}
+						else 
+						{
+						   echo "0 results";
+						}
 
-							mysqli_close($conn);
-						?>
+						mysqli_close($conn);
+					?>
 						
-			      		<tbody></tbody>
-			      	</table>
-			    </div>
+				</table>
 			</div>
- </form>
-                </div> 
-  
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-xs-12">
-                    <div class="widget clearfix">
-                        <div class="widget-title">
-                            <h3>About US</h3>
-                        </div>
-                        <p> Integer rutrum ligula eu dignissim laoreet. Pellentesque venenatis nibh sed tellus faucibus bibendum. Sed fermentum est vitae rhoncus molestie. Cum sociis natoque penatibus et magnis dis montes.</p>
-                        <p>Sed fermentum est vitae rhoncus molestie. Cum sociis natoque penatibus et magnis dis montes.</p>
-                    </div><!-- end clearfix -->
-                </div><!-- end col -->
+		</div>
+	</form>
+	</div> 
 
-				<div class="col-lg-4 col-md-4 col-xs-12">
-                    <div class="widget clearfix">
-                        <div class="widget-title">
-                            <h3>Information Link</h3>
-                        </div>
-                        <ul class="footer-links">
-                            <li><a href="index.php">Home</a></li>
-							<li><a href="about.php">Tentang Kami</a></li>
-							<li><a href="hosting.php">Rawatan</a></li>
-							<li><a href="contact.php">Contact</a></li>
-                        </ul><!-- end links -->
-                    </div><!-- end clearfix -->
-                </div><!-- end col -->
-				
-                <div class="col-lg-4 col-md-4 col-xs-12">
-                    <div class="widget clearfix">
-                        <div class="widget-title">
-                            <h3>Contact Details</h3>
-                        </div>
-
-                        <ul class="footer-links">
-                            <li><a href="mailto:#">info@yoursite.com</a></li>
-                            <li><a href="#">www.facebook.com</a></li>
-                            <li> Pusat Bandar Kangar, 01000 Kangar, Perlis</li>
-                            <li>+604-976 7366</li>
-                        </ul><!-- end links -->
-                    </div><!-- end clearfix -->
-                </div><!-- end col -->
-				
-            </div><!-- end row -->
-        </div><!-- end container -->
-    </footer><!-- end footer -->
-	
 	<script>
-                        // sandbox disable popups
-                        if (window.self !== window.top && window.name != "view1") {
-                            window.alert = function () {
-                                /*disable alert*/
-                            };
-                            window.confirm = function () {
-                                /*disable confirm*/
-                            };
-                            window.prompt = function () {
-                                /*disable prompt*/
-                            };
-                            window.open = function () {
-                                /*disable open*/
-                            };
-                        }
+		// sandbox disable popups
+		if (window.self !== window.top && window.name != "view1") {
+			window.alert = function () {
+				/*disable alert*/
+			};
+			window.confirm = function () {
+				/*disable confirm*/
+			};
+			window.prompt = function () {
+				/*disable prompt*/
+			};
+			window.open = function () {
+				/*disable open*/
+			};
+		}
 
-                        // prevent href=# click jump
-                        document.addEventListener(
-                                "DOMContentLoaded",
-                                function () {
-                                    var links = document.getElementsByTagName("A");
-                                    for (var i = 0; i < links.length; i++) {
-                                        if (links[i].href.indexOf("#") != -1) {
-                                            links[i].addEventListener("click", function (e) {
-                                                console.debug("prevent href=# click");
-                                                if (this.hash) {
-                                                    if (this.hash == "#") {
-                                                        e.preventDefault();
-                                                        return false;
-                                                    } else {
-                                                        /*
-                                                         var el = document.getElementById(this.hash.replace(/#/, ""));
-                                                         if (el) {
-                                                         el.scrollIntoView(true);
-                                                         }
-                                                         */
-                                                    }
-                                                }
-                                                return false;
-                                            });
-                                        }
-                                    }
-                                },
-                                false
-                                );
-                    </script>
-                    <!--scripts loaded here-->
-                    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-                    <script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js"></script>
-                    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+		// prevent href=# click jump
+		document.addEventListener(
+				"DOMContentLoaded",
+				function () {
+					var links = document.getElementsByTagName("A");
+					for (var i = 0; i < links.length; i++) {
+						if (links[i].href.indexOf("#") != -1) {
+							links[i].addEventListener("click", function (e) {
+								console.debug("prevent href=# click");
+								if (this.hash) {
+									if (this.hash == "#") {
+										e.preventDefault();
+										return false;
+									} else {
+										/*
+										 var el = document.getElementById(this.hash.replace(/#/, ""));
+										 if (el) {
+										 el.scrollIntoView(true);
+										 }
+										 */
+									}
+								}
+								return false;
+							});
+						}
+					}
+				},
+				false
+				);
+	</script>
+	<!--scripts loaded here-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
 
-                    <script>
-                        $(document).ready(function () {
-                            $("[data-toggle=offcanvas]").click(function () {
-                                $(".row-offcanvas").toggleClass("active");
-                            });
-                        });
-                    </script>
+	<script>
+		$(document).ready(function () {
+			$("[data-toggle=offcanvas]").click(function () {
+				$(".row-offcanvas").toggleClass("active");
+			});
+		});
+	</script>
 
     <!-- ALL JS FILES -->
     <script src="js/all.js"></script>

@@ -1,14 +1,14 @@
 <?php
     require('connection.php');
     // When form submitted, check and create user session.
-    if (isset($_POST['username'])) {
-        $username = stripslashes($_REQUEST['username']);    // removes backslashes
-        $username = mysqli_real_escape_string($conn, $username);
-        $ic = stripslashes($_REQUEST['ic']);
+    if (isset($_POST['ic'])) {
+        $ic = stripslashes($_REQUEST['ic']);    // removes backslashes
         $ic = mysqli_real_escape_string($conn, $ic);
+        $password = stripslashes($_REQUEST['password']);
+        $password = mysqli_real_escape_string($conn, $password);
         // Check user is exist in the database
-        $query    = "SELECT * FROM `tblpatient` WHERE username='$username'
-                     AND ic='$ic'";
+        $query    = "SELECT * FROM `tblpatient` WHERE ic='$ic'
+                     AND password='$password'";
         $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
         $num_rows = mysqli_num_rows($result);
 		$rows = mysqli_fetch_assoc($result); // cara declare row
@@ -19,11 +19,11 @@
 			$id_patient=$_SESSION['id_patient'];
 
             // Redirect to user dashboard page
-            header("Location: timeslot.php");
+            header("Location: slot.php");
         } else {
             echo "<div class='form'>
-                  <h3>Incorrect Username/password.</h3><br/>
-                  <p class='link'>Click here to <a href='login.php'>Login</a> again.</p>
+                  <h3>Kad Pengenalan Atau Kata Laluan Tidak Betul !</h3><br/>
+                  <p class='link'>Tekan <a href='login.php'>Login</a> Untuk LogMasuk</p>
                   </div>";
         }
     } else {
@@ -122,20 +122,19 @@
 					<form action="" method="post">
 										
 						<div class="form-group">
-							<label><strong>Username</strong></label>
-							<input type="text" name="username" class="form-control" placeholder="Masukkan Nama Pengguna" required />
+							<label><strong>Kad Pengenalan (IC)</strong></label>
+							<input type="number" name="ic" class="form-control" placeholder="Contoh :- 880808080088" required />
 						</div>
 						
 						<div class="form-group">
 							<label><strong>Kata Laluan</strong></label>
-							<input type="text" name="ic" class="form-control" placeholder="Masukkan Kad Pengenalan" required />
+							<input type="password" name="password" class="form-control" placeholder="Masukkan Kata Laluan" required />
 						</div>
 					
 						
 							<div class="form-group">
 									<input type="submit" name="submit"  class="btn btn-info btn-md" value="Login">
-									<p>Tidak Mempunyai Akaun ? <a href="register.php">Daftar</a>.<p>																						
-									<p> <a href="#">Lupa Kata Laluan ?</a><p>																						
+									<p>Tidak Mempunyai Akaun ? <a href="register.php">Daftar</a>.<p>																																												
 							</div>
 					</form>	
 				</div>

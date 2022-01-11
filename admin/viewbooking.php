@@ -309,27 +309,16 @@ function filterTable($query)
 				<div class="collapse navbar-collapse" id="navbars-host">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item"><a class="nav-link" href="admin.php">Home</a></li>
+						<li class="nav-item"><a class="nav-link" href="viewpatient.php">List Patient</a></li>
+						<li class="nav-item active"><a class="nav-link" href="viewbooking.php">List Appointment</a></li>
+						<li class="nav-item"><a class="nav-link" href="cuti.php">Public Holiday</a></li>
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">About Ohana </a>
+							<a class="nav-link dropdown-toggle" id="dropdown-a" data-toggle="dropdown"><strong>Welcome, <?php echo $_SESSION['username'];?></b> !</strong> </a>
 							<div class="dropdown-menu" aria-labelledby="dropdown-a">
-								<a class="dropdown-item" href="about.php">Latar Belakang</a>
-								<a class="dropdown-item" href="hosting.php">List Treatments</a>
-								<a class="dropdown-item" href="gallery.php">Gallery</a>
+								<a class="dropdown-item" href="#">Profile</a>
+								<a class="dropdown-item" href="logout.php">Logout </a>
 							</div>
 						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Patient </a>
-							<div class="dropdown-menu" aria-labelledby="dropdown-a">								
-								<a class="dropdown-item" href="viewpatient.php">Details Patient </a>								
-							</div>
-						</li>
-						<li class="nav-item dropdown active">
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Bookings </a>
-							<div class="dropdown-menu" aria-labelledby="dropdown-a">						
-								<a class="dropdown-item" href="viewbooking.php">View Treatments Booking</a>								
-							</div>
-						</li>
-						<li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>
 					</ul>
 				</div>
 			</div>
@@ -337,11 +326,6 @@ function filterTable($query)
 	</header>
 	<!-- End header -->
 	
-	<div class="all-title-box">
-		<div class="container text-center">
-			<h1>Appointment List<span class="m_1"></span></h1>
-		</div>
-	</div>
 	<BR>
 	
 	<div class="col-lg-12">
@@ -349,7 +333,7 @@ function filterTable($query)
 		<div class="checkdomain-wrapper">
 			<div class="form-group">
 				<label class="sr-only" for="domainnamehere">Domain name</label>
-				<input type="text" class="form-control" id="domainnamehere" name="valueToSearch" placeholder="Enter Name or Username">
+				<input type="text" class="form-control" id="domainnamehere" name="valueToSearch" placeholder="Enter Name">
 				<button type="submit" name="search" value="Filter" class="btn btn-primary grd1"><i class="fa fa-search"></i></button>
 			</div>
 			<hr>
@@ -385,7 +369,7 @@ function filterTable($query)
 								
 								<td>				
 									<center>												
-									<button><a href="displaybooking.php?id=<?php echo $row["id_book"]; ?>" class="btn btn-danger delete-listview-btn" onClick="return confirm">View</a></button>
+									<button><a href="displaybooking.php?id=<?php echo $row["id_book"]; ?>" class="btn btn-danger delete-listview-btn" onClick="return confirm">Detail</a></button>
 									<button><a href="deletebooking.php?id=<?php echo $row["id_book"]; ?>" class="btn btn-danger delete-listview-btn" onClick="return confirm('Do you really want to delete?');">Delete</a></button>
 									
 									</center>	
@@ -412,51 +396,7 @@ function filterTable($query)
 			 </form>
                 </div> 
   
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-xs-12">
-                    <div class="widget clearfix">
-                        <div class="widget-title">
-                            <h3>About US</h3>
-                        </div>
-                        <p> Integer rutrum ligula eu dignissim laoreet. Pellentesque venenatis nibh sed tellus faucibus bibendum. Sed fermentum est vitae rhoncus molestie. Cum sociis natoque penatibus et magnis dis montes.</p>
-                        <p>Sed fermentum est vitae rhoncus molestie. Cum sociis natoque penatibus et magnis dis montes.</p>
-                    </div><!-- end clearfix -->
-                </div><!-- end col -->
-
-				<div class="col-lg-4 col-md-4 col-xs-12">
-                    <div class="widget clearfix">
-                        <div class="widget-title">
-                            <h3>Information Link</h3>
-                        </div>
-                        <ul class="footer-links">
-                            <li><a href="index.php">Home</a></li>
-							<li><a href="about.php">Tentang Kami</a></li>
-							<li><a href="hosting.php">Rawatan</a></li>
-							<li><a href="contact.php">Contact</a></li>
-                        </ul><!-- end links -->
-                    </div><!-- end clearfix -->
-                </div><!-- end col -->
-				
-                <div class="col-lg-4 col-md-4 col-xs-12">
-                    <div class="widget clearfix">
-                        <div class="widget-title">
-                            <h3>Contact Details</h3>
-                        </div>
-
-                        <ul class="footer-links">
-                            <li><a href="mailto:#">info@yoursite.com</a></li>
-                            <li><a href="#">www.facebook.com</a></li>
-                            <li> Pusat Bandar Kangar, 01000 Kangar, Perlis</li>
-                            <li>+604-976 7366</li>
-                        </ul><!-- end links -->
-                    </div><!-- end clearfix -->
-                </div><!-- end col -->
-				
-            </div><!-- end row -->
-        </div><!-- end container -->
-    </footer><!-- end footer -->
+   
 	
 	<script>
                         // sandbox disable popups
